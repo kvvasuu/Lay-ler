@@ -1,13 +1,15 @@
 <template>
   <div
     class="trailer"
-    :style="{ height: size.width + 'rem', width: size.length + 'rem' }"
+    :style="{ height: trailerWidth + 'rem', width: trailerLength + 'rem' }"
   >
-    <div
-      v-for="pallet in pallets"
+    <pallet
+      v-for="(pallet, index) in pallets"
+      key="index"
       :style="{ height: pallet.width + 'rem', width: pallet.length + 'rem' }"
       class="pallet"
-    ></div>
+      :palletNumber="index"
+    ></pallet>
   </div>
 </template>
 
@@ -18,7 +20,7 @@ export default {
   components: {
     Pallet,
   },
-  props: ["size", "pallets"],
+  props: ["trailerLength", "trailerWidth", "pallets"],
   data() {
     return {};
   },

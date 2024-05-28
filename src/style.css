@@ -12,3 +12,29 @@ body {
   justify-content: center;
   min-height: 100vh;
 }
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 10rem;
+}
+
+@media screen and (max-width: 1060px) {
+  :root {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  :root {
+    font-size: 34px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    font-size: 24px;
+  }
+}

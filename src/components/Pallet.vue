@@ -1,22 +1,12 @@
 <template>
-  <div>
-    <label for="width">Width:</label><input name="width" type="number" />
-    <label for="length">Length:</label><input name="length" type="number" />
-  </div>
+  <div>{{ palletNumber + 1 }}</div>
 </template>
 
 <script>
 export default {
+  props: ["palletNumber"],
   data() {
-    return {
-      trailerSize: { x: 13.6, y: 2.45 },
-      pallets: [],
-    };
-  },
-  methods: {
-    addPallet(x, y) {
-      this.pallets.push({ x: x, y: y });
-    },
+    return {};
   },
 };
 </script>
