@@ -1,0 +1,14 @@
+:root {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-size: 64px;
+}
+
+body {
+  font-size: 0.25rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
