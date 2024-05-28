@@ -37,11 +37,10 @@ export default {
   flex-flow: column wrap;
   border: 0.08rem solid rgb(37, 31, 25);
   border-radius: 0.08rem;
-  gap: 1px;
 }
 .pallet {
   background-color: rgb(223, 163, 108);
-  border: 0.06rem solid rgb(173, 117, 65);
+  border: 0.01rem solid rgb(97, 82, 68);
   box-sizing: border-box;
   z-index: inherit;
   margin: auto;

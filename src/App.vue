@@ -6,7 +6,7 @@
       name="length"
       type="number"
       step="0.1"
-      min="0"
+      min="0.4"
       max="13.6"
     />
     <label for="width">Width:</label
@@ -15,7 +15,7 @@
       name="width"
       type="number"
       step="0.1"
-      min="0"
+      min="0.4"
       max="2.4"
     />
     <label for="numberOfPallets">Number of pallets:</label
@@ -25,7 +25,7 @@
       type="number"
       step="1"
       min="0"
-      max="100"
+      max="204"
     />
     <button @click="arrangePallets">Arrange</button>
   </div>
@@ -64,7 +64,9 @@ export default {
     },
     calculateNumberOfPallets() {
       let maxRows = Math.floor(this.trailerSize.width / this.palletWidth);
-      let maxCols = Math.floor(this.trailerSize.length / this.palletLength + );
+      let maxCols = Math.floor(this.trailerSize.length / this.palletLength);
+      console.log(maxCols);
+      console.log(this.palletLength * 0.02);
       if (maxCols * maxRows < this.numberOfPallets) {
         this.numberOfPallets = maxCols * maxRows;
       }
