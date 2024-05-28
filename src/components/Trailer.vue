@@ -3,13 +3,15 @@
     class="trailer"
     :style="{ height: trailerWidth + 'rem', width: trailerLength + 'rem' }"
   >
-    <pallet
-      v-for="(pallet, index) in pallets"
-      key="index"
-      :style="{ height: pallet.width + 'rem', width: pallet.length + 'rem' }"
-      class="pallet"
-      :palletNumber="index"
-    ></pallet>
+    <TransitionGroup name="fade">
+      <pallet
+        v-for="(pallet, index) in pallets"
+        key="index"
+        :style="{ height: pallet.width + 'rem', width: pallet.length + 'rem' }"
+        class="pallet"
+        :palletNumber="index"
+      ></pallet>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -41,10 +43,27 @@ export default {
   border-radius: 0.08rem;
 }
 .pallet {
-  background-color: rgb(223, 163, 108);
-  border: 0.01rem solid rgb(97, 82, 68);
+  transition: all 0.3s ease;
+  background: rgb(223, 163, 108);
+  background: radial-gradient(
+    circle,
+    rgba(223, 163, 108, 1) 0%,
+    rgb(177, 126, 82) 100%
+  );
+  border: 1px solid rgb(97, 82, 68);
+  border-radius: 0.05rem;
   box-sizing: border-box;
   z-index: inherit;
   margin: auto;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

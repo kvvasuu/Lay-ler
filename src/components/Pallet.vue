@@ -1,5 +1,5 @@
 <template>
-  <div>{{ palletNumber + 1 }}</div>
+  <div class="number">{{ palletNumber + 1 }}</div>
 </template>
 
 <script>
@@ -11,4 +11,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.number {
+  color: rgb(235, 235, 235);
+  padding: 2px;
+}
+</style>

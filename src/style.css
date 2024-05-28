@@ -1,6 +1,11 @@
 :root {
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #9e9e9e;
+  background: rgb(42, 41, 51);
+  background: radial-gradient(
+    circle,
+    rgb(54, 54, 56) 30%,
+    rgb(27, 27, 27) 100%
+  );
   font-size: 64px;
 }
 
@@ -10,7 +15,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+.title {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin: 0 0 0.1rem 0;
+}
+
+.description {
+  width: 10rem;
+  text-align: center;
+  margin: 0 0 0.6rem 0;
 }
 
 #app {
@@ -37,4 +55,7 @@ body {
   :root {
     font-size: 24px;
   }
+}
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

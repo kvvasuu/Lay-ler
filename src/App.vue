@@ -1,33 +1,38 @@
 <template>
   <div class="form-container">
-    <label for="length">Length:</label
-    ><input
-      v-model="palletLength"
-      name="length"
-      type="number"
-      step="0.1"
-      min="0.4"
-      max="13.6"
-    />
-    <label for="width">Width:</label
-    ><input
-      v-model="palletWidth"
-      name="width"
-      type="number"
-      step="0.1"
-      min="0.4"
-      max="2.4"
-    />
-    <label for="numberOfPallets">Number of pallets:</label
-    ><input
-      v-model="numberOfPallets"
-      name="numberOfPallets"
-      type="number"
-      step="1"
-      min="0"
-      max="204"
-    />
-    <hr />
+    <div class="pallet-input-group">
+      <input
+        v-model="palletLength"
+        name="length"
+        type="number"
+        step="0.1"
+        min="0.4"
+        max="13.6"
+        class="pallet-input"
+      /><label class="pallet-input-label" for="length">Length:</label>
+    </div>
+    <div class="pallet-input-group">
+      <input
+        v-model="palletWidth"
+        name="length"
+        type="number"
+        step="0.1"
+        min="0.4"
+        max="2.4"
+        class="pallet-input"
+      /><label class="pallet-input-label" for="width">Width:</label>
+    </div>
+    <div class="pallet-input-group">
+      <input
+        v-model="numberOfPallets"
+        name="numberOfPallets"
+        type="number"
+        step="1"
+        min="0"
+        max="204"
+        class="pallet-input"
+      /><label class="pallet-input-label" for="numberOfPallets">Number:</label>
+    </div>
   </div>
   <div class="trailer-container">
     <trailer
@@ -95,26 +100,38 @@ export default {
       this.arrangePallets();
     },
     palletLength() {
+      if (this.palletLength > 13.6) {
+        this.palletLength = 13.6;
+      }
+      if (this.palletLength < 0.4) {
+        this.palletLength = 0.4;
+      }
       this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     palletWidth() {
+      if (this.palletWidth > 2.4) {
+        this.palletWidth = 2.4;
+      }
+      if (this.palletWidth < 0.4) {
+        this.palletWidth = 0.4;
+      }
       this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     trailerLength() {
-      this.calculateNumberOfPallets();
-      this.arrangePallets();
       if (this.trailerLength > 15) {
         this.trailerLength = 15;
       }
-    },
-    trailerWidth() {
       this.calculateNumberOfPallets();
       this.arrangePallets();
+    },
+    trailerWidth() {
       if (this.trailerWidth > 4) {
         this.trailerWidth = 4;
       }
+      this.calculateNumberOfPallets();
+      this.arrangePallets();
     },
   },
   computed: {
@@ -126,9 +143,64 @@ export default {
 </script>
 
 <style scoped>
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pallet-input-group {
+  position: relative;
+  margin: 0.5rem;
+}
+
+.pallet-input {
+  outline: none !important;
+  background-color: transparent;
+  border: 1px solid #9e9e9e;
+  border-radius: 2rem;
+  padding: 0.1rem;
+  text-align: center;
+  color: #9e9e9e;
+  width: 2rem;
+  height: 0.6rem;
+  font-size: 0.35rem;
+  font-weight: bold;
+}
+
+.pallet-input:focus {
+  color: rgb(223, 163, 108);
+  outline: none !important;
+  border: 1.5px solid rgb(241, 165, 94);
+  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
+}
+
+.pallet-input-label {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9e9e9e;
+  font-weight: bold;
+  padding: 0 5px;
+  border: 1.5px solid #9e9e9e;
+  border-radius: 20px;
+  top: -11.5px;
+  left: 25px;
+  background-color: transparent;
+  cursor: default;
+  backdrop-filter: blur(10px);
+  transition: 0.3;
+}
+
+.pallet-input:focus ~ .pallet-input-label {
+  color: rgb(241, 165, 94);
+  border: 1.5px solid rgb(241, 165, 94);
+}
+
 .trailer-container {
   position: relative;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .trailer-length {
@@ -143,7 +215,7 @@ export default {
 .trailer-width {
   position: absolute;
   top: 50%;
-  right: -58px;
+  right: -50px;
   transform: translate(0, -50%);
   width: 40px;
   border: none;
@@ -164,5 +236,18 @@ export default {
 .trailer-size::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  width: 70%;
+  margin: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
 }
 </style>
