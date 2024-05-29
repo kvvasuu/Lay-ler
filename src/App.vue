@@ -1,5 +1,5 @@
 <template>
-  <div class="title">Lay-ler</div>
+  <div class="title">Layler</div>
   <div class="description">
     Your tool for optimal pallet placement on truck trailers. Enter the
     dimensions and quantity of pallets, and our app will automatically plan the
@@ -21,13 +21,17 @@
         /><label class="pallet-input-label" for="palletLength">Length:</label>
         <div
           class="pallet-input-arrow-up"
-          @click="increaseInput(this.$refs.palletLength)"
+          @mousedown="mouseDown(this.$refs.palletLength, 'increase')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-up arrow"></div>
         </div>
         <div
           class="pallet-input-arrow-down"
-          @click="decreaseInput(this.$refs.palletLength)"
+          @mousedown="mouseDown(this.$refs.palletLength, 'decrease')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-down arrow"></div>
         </div>
@@ -45,13 +49,17 @@
         /><label class="pallet-input-label" for="palletWidth">Width:</label>
         <div
           class="pallet-input-arrow-up"
-          @click="increaseInput(this.$refs.palletWidth)"
+          @mousedown="mouseDown(this.$refs.palletWidth, 'increase')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-up arrow"></div>
         </div>
         <div
           class="pallet-input-arrow-down"
-          @click="decreaseInput(this.$refs.palletWidth)"
+          @mousedown="mouseDown(this.$refs.palletWidth, 'decrease')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-down arrow"></div>
         </div>
@@ -71,13 +79,17 @@
         >
         <div
           class="pallet-input-arrow-up"
-          @click="increaseInput(this.$refs.numberOfPallets)"
+          @mousedown="mouseDown(this.$refs.numberOfPallets, 'increase')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-up arrow"></div>
         </div>
         <div
           class="pallet-input-arrow-down"
-          @click="decreaseInput(this.$refs.numberOfPallets)"
+          @mousedown="mouseDown(this.$refs.numberOfPallets, 'decrease')"
+          @mouseout="mouseUp"
+          @mouseup="mouseUp"
         >
           <div class="arrow-down arrow"></div>
         </div>
@@ -132,10 +144,12 @@ export default {
       trailerWidth: 2.45,
       palletLength: 1.2,
       palletWidth: 0.8,
-      numberOfPallets: 0,
+      numberOfPallets: 7,
       pallets: [],
       step: 0.1,
       sort: false,
+      interval: null,
+      isMouseDown: false,
     };
   },
   methods: {
@@ -148,7 +162,7 @@ export default {
           length: this.palletLength,
           width: this.palletWidth,
           number: number,
-          name: "Test",
+          name: "",
         });
         temp--;
         number++;
@@ -171,6 +185,43 @@ export default {
       if (ref.name == "numberOfPallets") step = 1;
       if (this[ref.name] > 0)
         this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
+    },
+    async mouseDown(ref, type) {
+      this.isMouseDown = true;
+      switch (type) {
+        case "increase":
+          this.increaseInput(ref);
+          this.interval = setInterval(() => {
+            this.increaseInput(ref);
+          }, 300);
+          setTimeout(() => {
+            clearInterval(this.interval);
+            if (this.isMouseDown) {
+              this.interval = setInterval(() => {
+                this.increaseInput(ref);
+              }, 100);
+            }
+          }, 1000);
+          break;
+        case "decrease":
+          this.decreaseInput(ref);
+          this.interval = setInterval(() => {
+            this.decreaseInput(ref);
+          }, 300);
+          setTimeout(() => {
+            clearInterval(this.interval);
+            if (this.isMouseDown) {
+              this.interval = setInterval(() => {
+                this.decreaseInput(ref);
+              }, 100);
+            }
+          }, 1000);
+          break;
+      }
+    },
+    mouseUp() {
+      this.isMouseDown = false;
+      clearInterval(this.interval);
     },
   },
   watch: {
@@ -217,6 +268,10 @@ export default {
     passPallets() {
       return this.pallets;
     },
+  },
+  mounted() {
+    this.calculateNumberOfPallets();
+    this.arrangePallets();
   },
 };
 </script>
@@ -436,5 +491,16 @@ hr {
     rgba(0, 0, 0, 0.75),
     rgba(0, 0, 0, 0)
   );
+}
+@media screen and (max-width: 600px) {
+  .form-inputs {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .trailer-container {
+    rotate: 90deg;
+  }
 }
 </style>

@@ -13,6 +13,7 @@
           class="name-input"
           v-model="palletName"
           ref="palletNameInput"
+          placeholder="Name"
         />
       </div>
       <div class="pallet-modal-inner">
@@ -194,27 +195,13 @@ export default {
   font-weight: bold;
   transition: all 0.3s ease;
   padding: 0;
-  animation-name: input-blink;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
   margin: 0.6rem;
 }
 
 .name-input:focus {
   border-color: rgb(241, 165, 94);
-  animation: none;
-}
-
-@keyframes input-blink {
-  0% {
-    border-color: #bdbdbd00;
-  }
-  50% {
-    border-color: #bdbdbd;
-  }
-  100% {
-    border-color: #bdbdbd00;
-  }
+  color: rgb(241, 165, 94);
+  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
 }
 
 .form-button {

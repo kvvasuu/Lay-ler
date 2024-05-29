@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 .trailer {
+  position: relative;
   background-color: rgb(97, 82, 68);
   display: flex;
   flex-direction: column;
@@ -76,6 +77,7 @@ export default {
   border: 0.08rem solid rgb(37, 31, 25);
   border-radius: 0.08rem;
 }
+
 .pallet {
   transition: all 0.3s ease;
   background: rgb(223, 163, 108);
@@ -87,7 +89,7 @@ export default {
   border: 1px solid rgb(97, 82, 68);
   border-radius: 0.05rem;
   box-sizing: border-box;
-  z-index: 2;
+  z-index: inherit;
   margin: auto;
 }
 

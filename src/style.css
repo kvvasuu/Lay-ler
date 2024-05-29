@@ -6,7 +6,7 @@
     rgb(54, 54, 56) 30%,
     rgb(27, 27, 27) 100%
   );
-  font-size: 64px;
+  font-size: 80px;
 }
 
 body {
@@ -27,23 +27,18 @@ body {
   min-width: 10rem;
 }
 
+@media screen and (max-width: 1300px) {
+  :root {
+    font-size: 64px;
+  }
+}
+
 @media screen and (max-width: 1060px) {
   :root {
     font-size: 48px;
   }
 }
 
-@media screen and (max-width: 800px) {
-  :root {
-    font-size: 34px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  :root {
-    font-size: 24px;
-  }
-}
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
