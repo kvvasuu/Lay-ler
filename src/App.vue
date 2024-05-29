@@ -329,8 +329,8 @@ export default {
   height: 0.18rem;
   top: 60%;
   border: none;
-  border-top: 4px solid #bdbdbd;
-  border-left: 4px solid #bdbdbd;
+  border-top: 0.06rem solid #bdbdbd;
+  border-left: 0.06rem solid #bdbdbd;
   rotate: 45deg;
 }
 
@@ -340,14 +340,14 @@ export default {
   height: 0.18rem;
   bottom: 60%;
   border: none;
-  border-top: 4px solid #bdbdbd;
-  border-left: 4px solid #bdbdbd;
+  border-top: 0.06rem solid #bdbdbd;
+  border-left: 0.06rem solid #bdbdbd;
   rotate: -135deg;
 }
 
 .arrow:hover {
-  border-top: 4px solid rgb(241, 165, 94);
-  border-left: 4px solid rgb(241, 165, 94);
+  border-top: 0.06rem solid rgb(241, 165, 94);
+  border-left: 0.06rem solid rgb(241, 165, 94);
   filter: drop-shadow(0 0 1px rgb(160, 113, 70));
 }
 

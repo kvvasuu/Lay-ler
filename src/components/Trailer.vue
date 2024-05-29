@@ -35,7 +35,6 @@ export default {
       setTimeout(() => {
         if (this.sort)
           this.pallets.sort((a, b) => b.length * b.width - a.length * a.width);
-
         this.calculateNumberOfPallets();
       }, 500);
     },
@@ -55,14 +54,6 @@ export default {
         }
       }, 600);
     },
-    /*   updatePallet(pallet) {
-      this.pallets[pallet.palletNumber].palletLength = pallet.palletLength;
-      this.pallets[pallet.palletNumber].palletWidth =  pallet.palletWidth;
-      this.palletWidth = pallet.palletWidth;
-      this.palletNumber = pallet.palletNumber;
-      this.palletName = pallet.palletName;
-      this.$emit("sort");
-    }, */
   },
   watch: {
     sort() {
