@@ -99,7 +99,7 @@ export default {
           length: this.palletLength,
           width: this.palletWidth,
           number: number,
-          name: "Granic 535",
+          name: "Granic 535", //for testing, normally empty string
         });
         temp--;
         number++;

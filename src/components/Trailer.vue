@@ -12,6 +12,7 @@
         :palletNum="pallet.number"
         :pallet="pallet"
         @sort="sortPallets"
+        @update-pallet="sortPallets"
         ref="pallets"
       ></pallet>
     </TransitionGroup>

@@ -1,8 +1,15 @@
 <template>
   <div @click="() => this.$emit('toggle-modal')" class="pallet-modal">
     <div class="pallet-modal-content" @click.stop="">
-      <div class="pallet-number">Pallet {{ pallet.number + 1 }}</div>
-      <div class="pallet-name">"{{ pallet.name }}"</div>
+      <div class="pallet-number">{{ pallet.number + 1 }}</div>
+      <div class="pallet-name">
+        <input
+          type="text"
+          class="name-input"
+          v-model="palletName"
+          ref="palletNameInput"
+        />
+      </div>
       <div class="pallet-modal-inner">
         <div class="pallet-input-group">
           <input
@@ -36,24 +43,22 @@
 
 <script>
 export default {
-  props: ["pallet", "palletNum"],
+  props: ["pallet"],
   emits: ["toggle-modal", "update-pallet"],
   data() {
     return {
       palletLength: this.pallet.length,
       palletWidth: this.pallet.width,
-      palletNumber: this.palletNum,
-      palletName: "",
+      palletName: this.pallet.name,
     };
   },
   methods: {
     updatePallet() {
-      this.$emit("update-pallet", {
-        palletLength: this.palletLength,
-        palletWidth: this.palletWidth,
-        palletNumber: this.palletNumber,
-        palletName: this.palletName,
-      });
+      this.pallet.length = this.palletLength;
+      this.pallet.width = this.palletWidth;
+      this.pallet.name = this.palletName;
+      this.$emit("update-pallet");
+      this.$emit("toggle-modal");
     },
   },
   watch: {
@@ -74,6 +79,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$refs.palletNameInput.focus();
+  },
 };
 </script>
 
@@ -90,8 +98,7 @@ export default {
   height: 100%;
   overflow: auto;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.096);
-  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.185);
   cursor: default;
 }
 
@@ -102,10 +109,11 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 50%;
-  height: 50%;
+  width: 10rem;
+  height: 10rem;
   border-radius: 0.6rem;
-  background-color: rgb(54, 54, 56);
+  background-color: rgba(54, 54, 56, 0.5);
+  backdrop-filter: blur(30px);
 }
 
 .pallet-modal-inner {
@@ -115,7 +123,10 @@ export default {
 }
 
 .pallet-number {
-  font-size: 0.6rem;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
   margin: 0.2rem;
@@ -127,10 +138,47 @@ export default {
   text-transform: uppercase;
 }
 
+.name-input {
+  outline: none !important;
+  background-color: transparent;
+  padding: 0.14rem 0.1rem 0.08rem 0.1rem;
+  border: none;
+  border-bottom: 1.5px solid #bdbdbd;
+  text-align: center;
+  color: #bdbdbd;
+  height: 0.6rem;
+  font-size: 0.35rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  padding: 0;
+  animation-name: input-blink;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  margin: 0.6rem;
+}
+
+.name-input:focus {
+  border-color: rgb(241, 165, 94);
+  animation: none;
+}
+
+@keyframes input-blink {
+  0% {
+    border-color: #bdbdbd00;
+  }
+  50% {
+    border-color: #bdbdbd;
+  }
+  100% {
+    border-color: #bdbdbd00;
+  }
+}
+
 .form-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0.2rem;
 }
 
 .pallet-input-group {

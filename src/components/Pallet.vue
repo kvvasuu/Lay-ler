@@ -26,8 +26,8 @@
       <pallet-modal
         v-if="showPalletSizeModal"
         :pallet="pallet"
-        :palletNum="pallet.numer"
         @toggle-modal="togglePalletSizeModal"
+        @update-pallet="updatePallet"
       ></pallet-modal>
     </transition>
   </div>
@@ -51,9 +51,9 @@ export default {
     togglePalletSizeModal() {
       this.showPalletSizeModal = !this.showPalletSizeModal;
     },
-    /* updatePallet(pallet) {
-      this.$emit("update-pallet", pallet);
-    }, */
+    updatePallet() {
+      this.$emit("update-pallet");
+    },
   },
   computed: {
     showDimensions() {
@@ -104,8 +104,10 @@ export default {
   color: rgb(235, 235, 235);
   position: absolute;
   font-size: 0.16rem;
-  left: 50%;
-  transform: translate(-50%, 0);
+  text-align: center;
+  left: 5%;
+  top: 50%;
+  transform: translate(0, -50%);
   opacity: 0;
   z-index: 2;
   width: 90%;
