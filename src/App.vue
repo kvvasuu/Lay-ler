@@ -187,7 +187,7 @@ export default {
   background-color: transparent;
   border: 1px solid #bdbdbd;
   border-radius: 2rem;
-  padding: 0.1rem;
+  padding: 0.14rem 0.1rem 0.08rem 0.1rem;
   text-align: center;
   color: #bdbdbd;
   width: 2rem;
@@ -214,8 +214,8 @@ export default {
   padding: 0 5px;
   border: 1.5px solid #bdbdbd;
   border-radius: 20px;
-  top: -11.5px;
-  left: 25px;
+  top: -20%;
+  left: 15%;
   background-color: transparent;
   cursor: default;
   backdrop-filter: blur(10px);

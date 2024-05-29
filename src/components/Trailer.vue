@@ -9,7 +9,7 @@
         v-for="(pallet, index) in pallets"
         key="index"
         class="pallet"
-        :palletNumber="index"
+        :palletNum="index"
         :pallet="pallet"
         @sort="sortPallets"
         ref="pallets"
