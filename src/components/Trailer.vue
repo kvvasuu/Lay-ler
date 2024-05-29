@@ -2,14 +2,17 @@
   <div
     class="trailer"
     :style="{ height: trailerWidth + 'rem', width: trailerLength + 'rem' }"
+    ref="trailer"
   >
     <TransitionGroup name="fade">
       <pallet
         v-for="(pallet, index) in pallets"
         key="index"
-        :style="{ height: pallet.width + 'rem', width: pallet.length + 'rem' }"
         class="pallet"
         :palletNumber="index"
+        :pallet="pallet"
+        @sort="sortPallets"
+        ref="pallets"
       ></pallet>
     </TransitionGroup>
   </div>
@@ -22,9 +25,39 @@ export default {
   components: {
     Pallet,
   },
-  props: ["trailerLength", "trailerWidth", "pallets"],
+  props: ["trailerLength", "trailerWidth", "pallets", "sort"],
   data() {
-    return {};
+    return { lastPalletPosition: 0, trailerRightBorderPosition: 0 };
+  },
+  methods: {
+    async sortPallets() {
+      setTimeout(() => {
+        if (this.sort)
+          this.pallets.sort((a, b) => b.length * b.width - a.length * a.width);
+        this.calculateNumberOfPallets();
+      }, 500);
+    },
+    async calculateNumberOfPallets() {
+      this.trailerRightBorderPosition =
+        this.$refs.trailer.getBoundingClientRect().right;
+
+      setTimeout(() => {
+        this.lastPalletPosition =
+          this.$refs.pallets[
+            this.$refs.pallets.length - 1
+          ].$el.getBoundingClientRect().right;
+
+        if (this.lastPalletPosition > this.trailerRightBorderPosition) {
+          this.pallets.pop();
+          this.calculateNumberOfPallets();
+        }
+      }, 600);
+    },
+  },
+  watch: {
+    sort() {
+      this.sortPallets();
+    },
   },
 };
 </script>
