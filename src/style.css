@@ -19,18 +19,6 @@ body {
   min-height: 100vh;
 }
 
-.title {
-  font-size: 0.7rem;
-  font-weight: bold;
-  margin: 0 0 0.1rem 0;
-}
-
-.description {
-  width: 10rem;
-  text-align: center;
-  margin: 0 0 0.6rem 0;
-}
-
 #app {
   display: flex;
   align-items: center;

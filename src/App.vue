@@ -1,32 +1,66 @@
 <template>
+  <div class="title">Lay-ler</div>
+  <div class="description">
+    Your tool for optimal pallet placement on truck trailers. Enter the
+    dimensions and quantity of pallets, and our app will automatically plan the
+    most efficient layout, saving you time and space.<br />
+    The perfect solution for logistics and transportation!
+  </div>
   <div class="form-container">
     <div class="form-inputs">
       <div class="pallet-input-group">
         <input
           v-model="palletLength"
-          name="length"
+          name="palletLength"
+          ref="palletLength"
           type="number"
           step="0.1"
           min="0.4"
           max="13.6"
           class="pallet-input"
-        /><label class="pallet-input-label" for="length">Length:</label>
+        /><label class="pallet-input-label" for="palletLength">Length:</label>
+        <div
+          class="pallet-input-arrow-up"
+          @click="increaseInput(this.$refs.palletLength)"
+        >
+          <div class="arrow-up arrow"></div>
+        </div>
+        <div
+          class="pallet-input-arrow-down"
+          @click="decreaseInput(this.$refs.palletLength)"
+        >
+          <div class="arrow-down arrow"></div>
+        </div>
       </div>
       <div class="pallet-input-group">
         <input
           v-model="palletWidth"
-          name="length"
+          name="palletWidth"
+          ref="palletWidth"
           type="number"
           step="0.1"
           min="0.4"
           max="2.4"
           class="pallet-input"
-        /><label class="pallet-input-label" for="width">Width:</label>
+        /><label class="pallet-input-label" for="palletWidth">Width:</label>
+        <div
+          class="pallet-input-arrow-up"
+          @click="increaseInput(this.$refs.palletWidth)"
+        >
+          <div class="arrow-up arrow"></div>
+        </div>
+        <div
+          class="pallet-input-arrow-down"
+          @click="decreaseInput(this.$refs.palletWidth)"
+        >
+          <div class="arrow-down arrow"></div>
+        </div>
       </div>
       <div class="pallet-input-group">
         <input
           v-model="numberOfPallets"
           name="numberOfPallets"
+          ref="numberOfPallets"
           type="number"
           step="1"
           min="0"
@@ -35,6 +69,18 @@
         /><label class="pallet-input-label" for="numberOfPallets"
           >Number:</label
         >
+        <div
+          class="pallet-input-arrow-up"
+          @click="increaseInput(this.$refs.numberOfPallets)"
+        >
+          <div class="arrow-up arrow"></div>
+        </div>
+        <div
+          class="pallet-input-arrow-down"
+          @click="decreaseInput(this.$refs.numberOfPallets)"
+        >
+          <div class="arrow-down arrow"></div>
+        </div>
       </div>
     </div>
     <div class="form-button">
@@ -58,8 +104,9 @@
       class="trailer-length trailer-size"
       v-model="trailerLength"
       type="number"
-      min="2"
+      min="1"
       max="20"
+      step="0.01"
     />
     <input
       class="trailer-width trailer-size"
@@ -67,6 +114,7 @@
       type="number"
       min="1"
       max="4"
+      step="0.01"
     />
   </div>
 </template>
@@ -86,6 +134,7 @@ export default {
       palletWidth: 0.8,
       numberOfPallets: 0,
       pallets: [],
+      step: 0.1,
       sort: false,
     };
   },
@@ -99,7 +148,7 @@ export default {
           length: this.palletLength,
           width: this.palletWidth,
           number: number,
-          name: "Granic 535", //for testing, normally empty string
+          name: "Test",
         });
         temp--;
         number++;
@@ -111,6 +160,17 @@ export default {
       if (maxCols * maxRows < this.numberOfPallets) {
         this.numberOfPallets = maxCols * maxRows;
       }
+    },
+    increaseInput(ref) {
+      let step = 0.1;
+      if (ref.name == "numberOfPallets") step = 1;
+      this[ref.name] = Math.round(Number(this[ref.name] + step) * 100) / 100;
+    },
+    decreaseInput(ref) {
+      let step = 0.1;
+      if (ref.name == "numberOfPallets") step = 1;
+      if (this[ref.name] > 0)
+        this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
     },
   },
   watch: {
@@ -162,6 +222,18 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin: 0 0 0.1rem 0;
+}
+
+.description {
+  width: 10rem;
+  text-align: center;
+  margin: 0 0 0.6rem 0;
+}
+
 .form-container {
   display: flex;
   align-items: center;
@@ -229,6 +301,58 @@ export default {
 .pallet-input:focus ~ .pallet-input-label {
   color: rgb(241, 165, 94);
   border: 1.5px solid rgb(241, 165, 94);
+}
+
+.pallet-input-arrow-up {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.34rem;
+  top: 0;
+  right: 0.1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.pallet-input-arrow-down {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.34rem;
+  bottom: 0;
+  right: 0.1rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.arrow-up {
+  position: absolute;
+  width: 0.18rem;
+  height: 0.18rem;
+  top: 60%;
+  border: none;
+  border-top: 4px solid #bdbdbd;
+  border-left: 4px solid #bdbdbd;
+  rotate: 45deg;
+}
+
+.arrow-down {
+  position: absolute;
+  width: 0.18rem;
+  height: 0.18rem;
+  bottom: 60%;
+  border: none;
+  border-top: 4px solid #bdbdbd;
+  border-left: 4px solid #bdbdbd;
+  rotate: -135deg;
+}
+
+.arrow:hover {
+  border-top: 4px solid rgb(241, 165, 94);
+  border-left: 4px solid rgb(241, 165, 94);
+  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
+}
+
+.arrow:active {
+  transform: scale(0.9);
 }
 
 .button-sort {

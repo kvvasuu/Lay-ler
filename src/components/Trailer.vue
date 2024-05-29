@@ -96,7 +96,7 @@ export default {
   border: 1px solid rgb(97, 82, 68);
   border-radius: 0.05rem;
   box-sizing: border-box;
-  z-index: inherit;
+  z-index: 2;
   margin: auto;
 }
 

@@ -1,6 +1,11 @@
 <template>
-  <div @click="() => this.$emit('toggle-modal')" class="pallet-modal">
+  <div
+    @click="() => this.$emit('toggle-modal')"
+    class="pallet-modal"
+    @keydown.enter="updatePallet"
+  >
     <div class="pallet-modal-content" @click.stop="">
+      <div class="close" @click="() => this.$emit('toggle-modal')"></div>
       <div class="pallet-number">{{ pallet.number + 1 }}</div>
       <div class="pallet-name">
         <input
@@ -14,24 +19,51 @@
         <div class="pallet-input-group">
           <input
             v-model="palletLength"
-            name="length"
+            name="palletLength"
+            ref="palletLength"
             type="number"
             step="0.1"
             min="0.4"
             max="13.6"
             class="pallet-input"
           /><label class="pallet-input-label" for="length">Length:</label>
+          <div
+            class="pallet-input-arrow-up"
+            @click="increaseInput(this.$refs.palletLength)"
+          >
+            <div class="arrow-up arrow"></div>
+          </div>
+          <div
+            class="pallet-input-arrow-down"
+            @click="decreaseInput(this.$refs.palletLength)"
+          >
+            <div class="arrow-down arrow"></div>
+          </div>
         </div>
+
         <div class="pallet-input-group">
           <input
             v-model="palletWidth"
-            name="length"
+            name="palletWidth"
+            ref="palletWidth"
             type="number"
             step="0.1"
             min="0.4"
             max="2.4"
             class="pallet-input"
           /><label class="pallet-input-label" for="width">Width:</label>
+          <div
+            class="pallet-input-arrow-up"
+            @click="increaseInput(this.$refs.palletWidth)"
+          >
+            <div class="arrow-up arrow"></div>
+          </div>
+          <div
+            class="pallet-input-arrow-down"
+            @click="decreaseInput(this.$refs.palletWidth)"
+          >
+            <div class="arrow-down arrow"></div>
+          </div>
         </div>
       </div>
       <div class="form-button">
@@ -59,6 +91,17 @@ export default {
       this.pallet.name = this.palletName;
       this.$emit("update-pallet");
       this.$emit("toggle-modal");
+    },
+    increaseInput(ref) {
+      let step = 0.1;
+      if (ref.name == "numberOfPallets") step = 1;
+      this[ref.name] = Math.round(Number(this[ref.name] + step) * 100) / 100;
+    },
+    decreaseInput(ref) {
+      let step = 0.1;
+      if (ref.name == "numberOfPallets") step = 1;
+      if (this[ref.name] > 0)
+        this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
     },
   },
   watch: {
@@ -99,6 +142,7 @@ export default {
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.185);
+  backdrop-filter: blur(2px);
   cursor: default;
 }
 
@@ -112,8 +156,7 @@ export default {
   width: 10rem;
   height: 10rem;
   border-radius: 0.6rem;
-  background-color: rgba(54, 54, 56, 0.5);
-  backdrop-filter: blur(30px);
+  background-color: rgba(54, 54, 56, 0.842);
 }
 
 .pallet-modal-inner {
@@ -124,7 +167,7 @@ export default {
 
 .pallet-number {
   position: absolute;
-  top: 5%;
+  top: 2%;
   left: 5%;
   font-size: 0.9rem;
   font-weight: bold;
@@ -253,5 +296,93 @@ export default {
 
 .button-set:active {
   transform: translate(0, 1px);
+}
+
+.close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close:hover {
+  filter: drop-shadow(0 0 6px rgb(160, 113, 70));
+}
+
+.close:hover:before,
+.close:hover:after {
+  background-color: rgb(241, 165, 94);
+}
+
+.close:before,
+.close:after {
+  position: absolute;
+  left: 0.2rem;
+  content: " ";
+  height: 0.6rem;
+  width: 0.06rem;
+  background-color: #bdbdbd;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.pallet-input-arrow-up {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.34rem;
+  top: 0;
+  right: 0.1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.pallet-input-arrow-down {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.34rem;
+  bottom: 0;
+  right: 0.1rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.arrow-up {
+  position: absolute;
+  width: 0.18rem;
+  height: 0.18rem;
+  top: 60%;
+  border: none;
+  border-top: 4px solid #bdbdbd;
+  border-left: 4px solid #bdbdbd;
+  rotate: 45deg;
+}
+
+.arrow-down {
+  position: absolute;
+  width: 0.18rem;
+  height: 0.18rem;
+  bottom: 60%;
+  border: none;
+  border-top: 4px solid #bdbdbd;
+  border-left: 4px solid #bdbdbd;
+  rotate: -135deg;
+}
+
+.arrow:hover {
+  border-top: 4px solid rgb(241, 165, 94);
+  border-left: 4px solid rgb(241, 165, 94);
+  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
+}
+
+.arrow:active {
+  transform: scale(0.9);
 }
 </style>
