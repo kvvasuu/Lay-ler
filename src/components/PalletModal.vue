@@ -30,13 +30,17 @@
           /><label class="pallet-input-label" for="length">Length:</label>
           <div
             class="pallet-input-arrow-up"
-            @click="increaseInput(this.$refs.palletLength)"
+            @mousedown="mouseDown(this.$refs.palletLength, 'increase')"
+            @mouseout="mouseUp"
+            @mouseup="mouseUp"
           >
             <div class="arrow-up arrow"></div>
           </div>
           <div
             class="pallet-input-arrow-down"
-            @click="decreaseInput(this.$refs.palletLength)"
+            @mousedown="mouseDown(this.$refs.palletLength, 'decrease')"
+            @mouseout="mouseUp"
+            @mouseup="mouseUp"
           >
             <div class="arrow-down arrow"></div>
           </div>
@@ -55,13 +59,17 @@
           /><label class="pallet-input-label" for="width">Width:</label>
           <div
             class="pallet-input-arrow-up"
-            @click="increaseInput(this.$refs.palletWidth)"
+            @mousedown="mouseDown(this.$refs.palletWidth, 'increase')"
+            @mouseout="mouseUp"
+            @mouseup="mouseUp"
           >
             <div class="arrow-up arrow"></div>
           </div>
           <div
             class="pallet-input-arrow-down"
-            @click="decreaseInput(this.$refs.palletWidth)"
+            @mousedown="mouseDown(this.$refs.palletWidth, 'decrease')"
+            @mouseout="mouseUp"
+            @mouseup="mouseUp"
           >
             <div class="arrow-down arrow"></div>
           </div>
@@ -83,6 +91,8 @@ export default {
       palletLength: this.pallet.length,
       palletWidth: this.pallet.width,
       palletName: this.pallet.name,
+      interval: null,
+      isMouseDown: false,
     };
   },
   methods: {
@@ -103,6 +113,43 @@ export default {
       if (ref.name == "numberOfPallets") step = 1;
       if (this[ref.name] > 0)
         this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
+    },
+    async mouseDown(ref, type) {
+      this.isMouseDown = true;
+      switch (type) {
+        case "increase":
+          this.increaseInput(ref);
+          this.interval = setInterval(() => {
+            this.increaseInput(ref);
+          }, 300);
+          setTimeout(() => {
+            clearInterval(this.interval);
+            if (this.isMouseDown) {
+              this.interval = setInterval(() => {
+                this.increaseInput(ref);
+              }, 100);
+            }
+          }, 1000);
+          break;
+        case "decrease":
+          this.decreaseInput(ref);
+          this.interval = setInterval(() => {
+            this.decreaseInput(ref);
+          }, 300);
+          setTimeout(() => {
+            clearInterval(this.interval);
+            if (this.isMouseDown) {
+              this.interval = setInterval(() => {
+                this.decreaseInput(ref);
+              }, 100);
+            }
+          }, 1000);
+          break;
+      }
+    },
+    mouseUp() {
+      this.isMouseDown = false;
+      clearInterval(this.interval);
     },
   },
   watch: {

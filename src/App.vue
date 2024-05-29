@@ -230,8 +230,8 @@ export default {
       this.arrangePallets();
     },
     palletLength() {
-      if (this.palletLength > 13.6) {
-        this.palletLength = 13.6;
+      if (this.palletLength > this.trailerLength) {
+        this.palletLength = this.trailerLength;
       }
       if (this.palletLength < 0.4) {
         this.palletLength = 0.4;
@@ -240,8 +240,8 @@ export default {
       this.arrangePallets();
     },
     palletWidth() {
-      if (this.palletWidth > 2.4) {
-        this.palletWidth = 2.4;
+      if (this.palletWidth > this.trailerWidth) {
+        this.palletWidth = this.trailerWidth;
       }
       if (this.palletWidth < 0.4) {
         this.palletWidth = 0.4;
@@ -253,12 +253,18 @@ export default {
       if (this.trailerLength > 15) {
         this.trailerLength = 15;
       }
+      if (this.trailerLength < this.palletLength) {
+        this.palletLength = this.trailerLength;
+      }
       this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     trailerWidth() {
       if (this.trailerWidth > 4) {
         this.trailerWidth = 4;
+      }
+      if (this.trailerWidth < this.palletWidth) {
+        this.palletWidth = this.trailerWidth;
       }
       this.calculateNumberOfPallets();
       this.arrangePallets();
