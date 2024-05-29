@@ -1,29 +1,33 @@
 <template>
   <div
     class="outer-pallet"
-    :style="{ height: palletWidth + 'rem', width: palletLength + 'rem' }"
+    :style="{
+      height: pallet.width + 'rem',
+      width: pallet.length + 'rem',
+    }"
   >
     <div
       class="inner-pallet"
+      :style="{
+        height: pallet.width + 'rem',
+        width: pallet.length + 'rem',
+      }"
       @click="togglePalletSizeModal"
-      :style="{ height: palletWidth + 'rem', width: palletLength + 'rem' }"
     >
-      <div class="number">{{ palletNumber + 1 }}</div>
+      <div class="number">{{ pallet.number + 1 }}</div>
       <div class="name">
-        {{ palletName }}
+        {{ showName }}
       </div>
       <div class="dimensions">
-        {{ Number(palletLength).toFixed(2) }} x
-        {{ Number(palletWidth).toFixed(2) }}
+        {{ showDimensions }}
       </div>
     </div>
     <transition name="fade">
       <pallet-modal
         v-if="showPalletSizeModal"
         :pallet="pallet"
-        :palletNum="palletNumber"
+        :palletNum="pallet.numer"
         @toggle-modal="togglePalletSizeModal"
-        @update-pallet="updatePallet"
       ></pallet-modal>
     </transition>
   </div>
@@ -37,26 +41,32 @@ export default {
     PalletModal,
   },
   props: ["palletNum", "pallet"],
-  emits: ["sort"],
+  emits: ["sort", "update-pallet"],
   data() {
     return {
       showPalletSizeModal: false,
-      palletLength: this.pallet.length,
-      palletWidth: this.pallet.width,
-      palletName: "",
-      palletNumber: this.palletNum,
     };
   },
   methods: {
     togglePalletSizeModal() {
       this.showPalletSizeModal = !this.showPalletSizeModal;
     },
-    updatePallet(pallet) {
-      this.palletLength = pallet.palletLength;
-      this.palletWidth = pallet.palletWidth;
-      this.palletNumber = pallet.palletNumber;
-      this.palletName = pallet.palletName;
-      this.$emit("sort");
+    /* updatePallet(pallet) {
+      this.$emit("update-pallet", pallet);
+    }, */
+  },
+  computed: {
+    showDimensions() {
+      if (this.pallet.length >= 0.8 && this.pallet.width >= 0.8) {
+        return `${Number(this.pallet.length).toFixed(2)} x ${Number(
+          this.pallet.width
+        ).toFixed(2)}`;
+      }
+    },
+    showName() {
+      if (this.pallet.length >= 0.8 && this.pallet.width >= 0.8) {
+        return this.pallet.name;
+      }
     },
   },
 };

@@ -1,7 +1,8 @@
 <template>
   <div @click="() => this.$emit('toggle-modal')" class="pallet-modal">
     <div class="pallet-modal-content" @click.stop="">
-      <div class="pallet-number">Pallet {{ palletNumber + 1 }}</div>
+      <div class="pallet-number">Pallet {{ pallet.number + 1 }}</div>
+      <div class="pallet-name">"{{ pallet.name }}"</div>
       <div class="pallet-modal-inner">
         <div class="pallet-input-group">
           <input
@@ -63,7 +64,6 @@ export default {
       if (this.palletLength < 0.4) {
         this.palletLength = 0.4;
       }
-      console.log(this.palletLength);
     },
     palletWidth() {
       if (this.palletWidth > 2.4) {
@@ -115,7 +115,14 @@ export default {
 }
 
 .pallet-number {
-  font-size: 0.5rem;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0.2rem;
+}
+
+.pallet-name {
+  font-size: 0.3rem;
   font-weight: bold;
   text-transform: uppercase;
 }

@@ -93,12 +93,16 @@ export default {
     arrangePallets() {
       this.pallets = [];
       let temp = this.numberOfPallets;
+      let number = 0;
       while (temp > 0) {
         this.pallets.push({
           length: this.palletLength,
           width: this.palletWidth,
+          number: number,
+          name: "Granic 535",
         });
         temp--;
+        number++;
       }
     },
     calculateNumberOfPallets() {
