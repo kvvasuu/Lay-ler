@@ -504,9 +504,9 @@ hr {
   }
 }
 
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
   .trailer-container {
     rotate: 90deg;
   }
-}
+} */
 </style>
