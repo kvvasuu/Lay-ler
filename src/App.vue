@@ -253,8 +253,9 @@ export default {
         (this.palletLength = 1.2),
         (this.palletWidth = 0.8),
         (this.numberOfPallets = 7),
-        (this.pallets = []),
         (this.sort = false);
+      this.calculateNumberOfPallets();
+      this.arrangePallets();
     },
     mouseUp() {
       this.isMouseDown = false;
