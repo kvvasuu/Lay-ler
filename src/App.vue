@@ -129,6 +129,10 @@
       step="0.01"
     />
   </div>
+  <div class="state-buttons">
+    <button class="button-sort state-button" @click="resetState">Reset</button>
+    <button class="button-sort state-button" @click="saveState">Save</button>
+  </div>
 </template>
 
 <script>
@@ -163,6 +167,7 @@ export default {
           width: this.palletWidth,
           number: number,
           name: "",
+          color: "#dfa36c",
         });
         temp--;
         number++;
@@ -218,6 +223,38 @@ export default {
           }, 1000);
           break;
       }
+    },
+    saveState() {
+      localStorage.setItem("pallets", JSON.stringify(this.pallets));
+      localStorage.setItem("trailerLength", JSON.stringify(this.trailerLength));
+      localStorage.setItem("trailerWidth", JSON.stringify(this.trailerWidth));
+      localStorage.setItem("palletLength", JSON.stringify(this.palletLength));
+      localStorage.setItem("palletWidth", JSON.stringify(this.palletWidth));
+      localStorage.setItem(
+        "numberOfPallets",
+        JSON.stringify(this.numberOfPallets)
+      );
+      localStorage.setItem("sort", JSON.stringify(this.sort));
+    },
+    loadState() {
+      this.pallets = JSON.parse(localStorage.getItem("pallets"));
+      this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
+      this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
+      this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
+      this.palletWidth = JSON.parse(localStorage.getItem("palletWidth"));
+      this.numberOfPallets = JSON.parse(
+        localStorage.getItem("numberOfPallets")
+      );
+      this.sort = JSON.parse(localStorage.getItem("sort"));
+    },
+    resetState() {
+      (this.trailerLength = 13.6),
+        (this.trailerWidth = 2.45),
+        (this.palletLength = 1.2),
+        (this.palletWidth = 0.8),
+        (this.numberOfPallets = 7),
+        (this.pallets = []),
+        (this.sort = false);
     },
     mouseUp() {
       this.isMouseDown = false;
@@ -278,6 +315,7 @@ export default {
   mounted() {
     this.calculateNumberOfPallets();
     this.arrangePallets();
+    this.loadState();
   },
 };
 </script>
@@ -486,18 +524,16 @@ export default {
   margin: 0;
 }
 
-hr {
-  border: 0;
-  height: 1px;
-  width: 70%;
-  margin: 0;
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.75),
-    rgba(0, 0, 0, 0)
-  );
+.state-buttons {
+  margin-top: 0.6rem;
+  margin-left: auto;
+  margin-right: 0.6rem;
 }
+
+.state-button {
+  margin: 0 0 0 0.2rem;
+}
+
 @media screen and (max-width: 600px) {
   .form-inputs {
     flex-direction: column;

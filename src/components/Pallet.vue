@@ -14,11 +14,13 @@
       }"
       @click="togglePalletSizeModal"
     >
-      <div class="number">{{ pallet.number + 1 }}</div>
-      <div class="name">
+      <div class="number" :style="{ color: textColor }">
+        {{ pallet.number + 1 }}
+      </div>
+      <div class="name" :style="{ color: textColor }">
         {{ showName }}
       </div>
-      <div class="dimensions">
+      <div class="dimensions" :style="{ color: textColor }">
         {{ showDimensions }}
       </div>
     </div>
@@ -28,6 +30,7 @@
         :pallet="pallet"
         @toggle-modal="togglePalletSizeModal"
         @update-pallet="updatePallet"
+        @update-all-pallets="(pallet) => $emit('update-all-pallets', pallet)"
       ></pallet-modal>
     </transition>
   </div>
@@ -40,11 +43,12 @@ export default {
   components: {
     PalletModal,
   },
-  props: ["palletNum", "pallet"],
-  emits: ["sort", "update-pallet"],
+  props: ["pallet"],
+  emits: ["sort", "update-pallet", "update-all-pallets"],
   data() {
     return {
       showPalletSizeModal: false,
+      textColor: "#efefef",
     };
   },
   methods: {
@@ -83,14 +87,12 @@ export default {
 }
 
 .number {
-  color: rgb(235, 235, 235);
   padding: 2px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .dimensions {
-  color: rgb(235, 235, 235);
   position: absolute;
   font-size: 0.16rem;
   bottom: 0.05rem;
@@ -101,7 +103,6 @@ export default {
 }
 
 .name {
-  color: rgb(235, 235, 235);
   position: absolute;
   font-size: 0.16rem;
   text-align: center;

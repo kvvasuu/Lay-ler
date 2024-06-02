@@ -75,22 +75,33 @@
           </div>
         </div>
       </div>
+      <color-picker
+        :color="this.palletColor"
+        @update-color="(color) => (palletColor = color)"
+      ></color-picker>
       <div class="form-button">
         <button class="button-set" @click="updatePallet">Set</button>
+        <button class="button-set" @click="updateAllPallets">Set all</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ColorPicker from "./ColorPicker.vue";
+
 export default {
+  components: {
+    ColorPicker,
+  },
   props: ["pallet"],
-  emits: ["toggle-modal", "update-pallet"],
+  emits: ["toggle-modal", "update-pallet", "update-all-pallets"],
   data() {
     return {
       palletLength: this.pallet.length,
       palletWidth: this.pallet.width,
       palletName: this.pallet.name,
+      palletColor: this.pallet.color,
       interval: null,
       isMouseDown: false,
     };
@@ -100,8 +111,13 @@ export default {
       this.pallet.length = this.palletLength;
       this.pallet.width = this.palletWidth;
       this.pallet.name = this.palletName;
+      this.pallet.color = this.palletColor;
       this.$emit("update-pallet");
       this.$emit("toggle-modal");
+    },
+    updateAllPallets() {
+      this.updatePallet();
+      this.$emit("update-all-pallets", this.pallet);
     },
     increaseInput(ref) {
       let step = 0.1;
@@ -255,7 +271,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.2rem;
 }
 
 .pallet-input-group {
@@ -320,6 +335,7 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
+  margin: 0 0.2rem 0 0.2rem;
 }
 
 .button-set:hover {

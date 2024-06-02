@@ -9,11 +9,12 @@
         v-for="pallet in pallets"
         :key="pallet.number"
         class="pallet"
-        :palletNum="pallet.number"
         :pallet="pallet"
         @sort="sortPallets"
         @update-pallet="sortPallets"
         ref="pallets"
+        :style="{ 'background-color': pallet.color }"
+        @update-all-pallets="(pallet) => updateAllPallets(pallet)"
       ></pallet>
     </TransitionGroup>
   </div>
@@ -27,8 +28,13 @@ export default {
     Pallet,
   },
   props: ["trailerLength", "trailerWidth", "pallets", "sort"],
+  emits: ["update-all-pallets"],
   data() {
-    return { lastPalletPosition: 0, trailerRightBorderPosition: 0 };
+    return {
+      lastPalletPosition: 0,
+      trailerRightBorderPosition: 0,
+      processing: false,
+    };
   },
   methods: {
     async sortPallets() {
@@ -39,6 +45,7 @@ export default {
       }, 500);
     },
     async calculateNumberOfPallets() {
+      this.processing = true;
       this.trailerRightBorderPosition =
         this.$refs.trailer.getBoundingClientRect().right;
 
@@ -53,6 +60,14 @@ export default {
           this.calculateNumberOfPallets();
         }
       }, 600);
+    },
+    updateAllPallets(pallet) {
+      this.pallets.map((el) => {
+        el.length = pallet.length;
+        el.width = pallet.width;
+        el.name = pallet.name;
+        el.color = pallet.color;
+      });
     },
   },
   watch: {
@@ -80,12 +95,6 @@ export default {
 
 .pallet {
   transition: all 0.3s ease;
-  background: rgb(223, 163, 108);
-  background: radial-gradient(
-    circle,
-    rgba(223, 163, 108, 1) 0%,
-    rgb(177, 126, 82) 100%
-  );
   border: 1px solid rgb(97, 82, 68);
   border-radius: 0.05rem;
   box-sizing: border-box;
