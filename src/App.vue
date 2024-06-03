@@ -322,8 +322,7 @@ export default {
     if (localStorage.getItem("pallets")) {
       this.loadState();
     } else {
-      this.calculateNumberOfPallets();
-      this.arrangePallets();
+      this.resetState();
     }
   },
 };
