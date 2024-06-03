@@ -154,23 +154,27 @@ export default {
       sort: false,
       interval: null,
       isMouseDown: false,
+      dataGotFromStorage: false,
     };
   },
   methods: {
     arrangePallets() {
-      this.pallets = [];
-      let temp = this.numberOfPallets;
-      let number = 0;
-      while (temp > 0) {
-        this.pallets.push({
-          length: this.palletLength,
-          width: this.palletWidth,
-          number: number,
-          name: "",
-          color: "#dfa36c",
-        });
-        temp--;
-        number++;
+      if (this.dataGotFromStorage) {
+        this.calculateNumberOfPallets();
+        this.pallets = [];
+        let temp = this.numberOfPallets;
+        let number = 0;
+        while (temp > 0) {
+          this.pallets.push({
+            length: this.palletLength,
+            width: this.palletWidth,
+            number: number,
+            name: "",
+            color: "#dfa36c",
+          });
+          temp--;
+          number++;
+        }
       }
     },
     calculateNumberOfPallets() {
@@ -238,15 +242,16 @@ export default {
     },
     loadState() {
       if (localStorage.getItem("pallets")) {
-        /* this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
+        this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
         this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
         this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
         this.palletWidth = JSON.parse(localStorage.getItem("palletWidth"));
         this.numberOfPallets = JSON.parse(
           localStorage.getItem("numberOfPallets")
         );
-        this.sort = JSON.parse(localStorage.getItem("sort")); */
+        this.sort = JSON.parse(localStorage.getItem("sort"));
         this.pallets = JSON.parse(localStorage.getItem("pallets"));
+        this.dataGotFromStorage = true;
       } else {
         this.resetState();
       }
@@ -258,7 +263,6 @@ export default {
         (this.palletWidth = 0.8),
         (this.numberOfPallets = 7),
         (this.sort = false);
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     mouseUp() {
@@ -268,7 +272,6 @@ export default {
   },
   watch: {
     numberOfPallets() {
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     palletLength() {
@@ -278,7 +281,6 @@ export default {
       if (this.palletLength < 0.4) {
         this.palletLength = 0.4;
       }
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     palletWidth() {
@@ -288,7 +290,6 @@ export default {
       if (this.palletWidth < 0.4) {
         this.palletWidth = 0.4;
       }
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     trailerLength() {
@@ -298,7 +299,6 @@ export default {
       if (this.trailerLength < this.palletLength) {
         this.palletLength = this.trailerLength;
       }
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
     trailerWidth() {
@@ -308,13 +308,11 @@ export default {
       if (this.trailerWidth < this.palletWidth) {
         this.palletWidth = this.trailerWidth;
       }
-      this.calculateNumberOfPallets();
       this.arrangePallets();
     },
   },
   computed: {
     passPallets() {
-      console.log(this.pallets);
       return this.pallets;
     },
   },
