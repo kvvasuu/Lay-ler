@@ -319,7 +319,7 @@ export default {
       return this.pallets;
     },
   },
-  mounted() {
+  beforeMount() {
     this.loadState();
   },
 };
