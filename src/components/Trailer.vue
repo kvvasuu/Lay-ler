@@ -33,7 +33,6 @@ export default {
     return {
       lastPalletPosition: 0,
       trailerRightBorderPosition: 0,
-      processing: false,
     };
   },
   methods: {
@@ -45,7 +44,6 @@ export default {
       }, 500);
     },
     async calculateNumberOfPallets() {
-      this.processing = true;
       this.trailerRightBorderPosition =
         this.$refs.trailer.getBoundingClientRect().right;
 

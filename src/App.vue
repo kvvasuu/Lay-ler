@@ -315,13 +315,12 @@ export default {
   },
   computed: {
     passPallets() {
+      console.log(this.pallets);
       return this.pallets;
     },
   },
   mounted() {
-    if (localStorage.getItem("pallets")) {
-      this.loadState();
-    }
+    this.loadState();
   },
 };
 </script>
