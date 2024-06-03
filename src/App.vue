@@ -154,12 +154,10 @@ export default {
       sort: false,
       interval: null,
       isMouseDown: false,
-      dataGotFromStorage: false,
     };
   },
   methods: {
     arrangePallets() {
-      /* if (this.dataGotFromStorage) { */
       this.calculateNumberOfPallets();
       this.pallets = [];
       let temp = this.numberOfPallets;
@@ -175,7 +173,6 @@ export default {
         temp--;
         number++;
       }
-      /* } */
     },
     calculateNumberOfPallets() {
       let maxRows = Math.floor(this.trailerWidth / this.palletWidth);
@@ -259,9 +256,7 @@ export default {
         );
         this.sort = await JSON.parse(localStorage.getItem("sort"));
         this.pallets = await JSON.parse(localStorage.getItem("pallets"));
-        /* this.dataGotFromStorage = true; */
       } else {
-        /* this.dataGotFromStorage = true; */
         this.resetState();
       }
     },
@@ -322,10 +317,12 @@ export default {
   },
   computed: {
     passPallets() {
+      console.log(this.pallets);
       return this.pallets;
     },
   },
   created() {
+    console.log(this.pallets);
     this.loadState();
   },
 };
