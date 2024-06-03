@@ -14,13 +14,13 @@
       }"
       @click="togglePalletSizeModal"
     >
-      <div class="number" :style="{ color: textColor }">
+      <div class="number">
         {{ pallet.number + 1 }}
       </div>
-      <div class="name" :style="{ color: textColor }">
+      <div class="name">
         {{ showName }}
       </div>
-      <div class="dimensions" :style="{ color: textColor }">
+      <div class="dimensions">
         {{ showDimensions }}
       </div>
     </div>
@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       showPalletSizeModal: false,
-      textColor: "#efefef",
     };
   },
   methods: {
@@ -84,6 +83,7 @@ export default {
 .inner-pallet {
   position: absolute;
   cursor: pointer;
+  color: #efefef;
 }
 
 .number {

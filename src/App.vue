@@ -247,6 +247,8 @@ export default {
           localStorage.getItem("numberOfPallets")
         );
         this.sort = JSON.parse(localStorage.getItem("sort"));
+        console.log(this.pallets[0].name);
+        console.log(this.pallets[0].color);
       } else {
         this.resetState();
       }
