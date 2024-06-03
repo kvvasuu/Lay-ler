@@ -241,7 +241,7 @@ export default {
       localStorage.setItem("sort", JSON.stringify(this.sort));
     },
     loadState() {
-      if (localStorage.getItem("pallets")) {
+      if (localStorage.getItem("pallets") !== null) {
         this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
         this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
         this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
