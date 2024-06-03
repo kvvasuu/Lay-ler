@@ -1,7 +1,43 @@
-# Vue 3 + Vite
+# Layler
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![App demo](https://raw.githubusercontent.com/kvvasuu/lay-ler/main/demo.gif "App demo")
 
-## Recommended IDE Setup
+## General info
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+"Layler" is an application designed for visualizing the layout of pallets in a truck trailer. The name is a blend of the words "Layout" and "Trailer". With Layler, you can easily plan and optimize the arrangement of pallets in your truck.
+
+The application has been deployed on Netlify - [https://layler.netlify.app/](https://layler.netlify.app/)
+
+## Features:
+- Trailer Dimensions Setup: Configure the dimensions of the trailer to match your actual needs.
+- Add Pallets: Specify the number of pallets and their sizes.
+- Real-Time Visualization: The application visualizes the pallet layout in real time.
+- Pallet Sorting: Option to automatically sort pallets from largest to smallest for optimal space utilization.
+- Pallet Modification: Each pallet can be individually edited to change its size, name, or color.
+
+## Technologies:
+
+- Vue
+- FontAwesome
+
+## Setup
+
+```
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run all tests
+npm test
+```
