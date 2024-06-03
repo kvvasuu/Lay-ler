@@ -319,7 +319,9 @@ export default {
     },
   },
   mounted() {
-    this.loadState();
+    setTimeout(() => {
+      this.loadState();
+    }, 1000);
   },
 };
 </script>
