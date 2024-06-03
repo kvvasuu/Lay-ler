@@ -255,6 +255,7 @@ export default {
           this.dataGotFromStorage = true;
         }, 1000);
       } else {
+        this.dataGotFromStorage = true;
         this.resetState();
       }
     },
