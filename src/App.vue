@@ -238,15 +238,15 @@ export default {
     },
     loadState() {
       if (localStorage.getItem("pallets")) {
-        this.pallets = JSON.parse(localStorage.getItem("pallets"));
-        this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
+        /* this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
         this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
         this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
         this.palletWidth = JSON.parse(localStorage.getItem("palletWidth"));
         this.numberOfPallets = JSON.parse(
           localStorage.getItem("numberOfPallets")
         );
-        this.sort = JSON.parse(localStorage.getItem("sort"));
+        this.sort = JSON.parse(localStorage.getItem("sort")); */
+        this.pallets = JSON.parse(localStorage.getItem("pallets"));
       } else {
         this.resetState();
       }
@@ -318,10 +318,8 @@ export default {
       return this.pallets;
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.loadState();
-    }, 1000);
+  created() {
+    this.loadState();
   },
 };
 </script>
