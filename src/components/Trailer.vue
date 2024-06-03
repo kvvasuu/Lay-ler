@@ -91,6 +91,7 @@ export default {
   flex-flow: column wrap;
   border: 0.08rem solid rgb(37, 31, 25);
   border-radius: 0.08rem;
+  padding: 1px;
 }
 
 .pallet {
