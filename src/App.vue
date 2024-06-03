@@ -319,9 +319,9 @@ export default {
     },
   },
   mounted() {
-    this.loadState();
     this.calculateNumberOfPallets();
     this.arrangePallets();
+    this.loadState();
   },
 };
 </script>
