@@ -251,7 +251,9 @@ export default {
         );
         this.sort = JSON.parse(localStorage.getItem("sort"));
         this.pallets = JSON.parse(localStorage.getItem("pallets"));
-        /* this.dataGotFromStorage = true; */
+        setTimeout(() => {
+          this.dataGotFromStorage = true;
+        }, 1000);
       } else {
         this.resetState();
       }
