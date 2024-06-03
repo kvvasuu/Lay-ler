@@ -321,8 +321,6 @@ export default {
   mounted() {
     if (localStorage.getItem("pallets")) {
       this.loadState();
-    } else {
-      this.resetState();
     }
   },
 };
