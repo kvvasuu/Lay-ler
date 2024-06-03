@@ -159,23 +159,23 @@ export default {
   },
   methods: {
     arrangePallets() {
-      if (this.dataGotFromStorage) {
-        this.calculateNumberOfPallets();
-        this.pallets = [];
-        let temp = this.numberOfPallets;
-        let number = 0;
-        while (temp > 0) {
-          this.pallets.push({
-            length: this.palletLength,
-            width: this.palletWidth,
-            number: number,
-            name: "",
-            color: "#dfa36c",
-          });
-          temp--;
-          number++;
-        }
+      /* if (this.dataGotFromStorage) { */
+      this.calculateNumberOfPallets();
+      this.pallets = [];
+      let temp = this.numberOfPallets;
+      let number = 0;
+      while (temp > 0) {
+        this.pallets.push({
+          length: this.palletLength,
+          width: this.palletWidth,
+          number: number,
+          name: "",
+          color: "#dfa36c",
+        });
+        temp--;
+        number++;
       }
+      /* } */
     },
     calculateNumberOfPallets() {
       let maxRows = Math.floor(this.trailerWidth / this.palletWidth);
@@ -259,9 +259,9 @@ export default {
         );
         this.sort = await JSON.parse(localStorage.getItem("sort"));
         this.pallets = await JSON.parse(localStorage.getItem("pallets"));
-        this.dataGotFromStorage = true;
+        /* this.dataGotFromStorage = true; */
       } else {
-        this.dataGotFromStorage = true;
+        /* this.dataGotFromStorage = true; */
         this.resetState();
       }
     },
