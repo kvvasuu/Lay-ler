@@ -237,15 +237,19 @@ export default {
       localStorage.setItem("sort", JSON.stringify(this.sort));
     },
     loadState() {
-      this.pallets = JSON.parse(localStorage.getItem("pallets"));
-      this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
-      this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
-      this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
-      this.palletWidth = JSON.parse(localStorage.getItem("palletWidth"));
-      this.numberOfPallets = JSON.parse(
-        localStorage.getItem("numberOfPallets")
-      );
-      this.sort = JSON.parse(localStorage.getItem("sort"));
+      if (localStorage.getItem("pallets")) {
+        this.pallets = JSON.parse(localStorage.getItem("pallets"));
+        this.trailerLength = JSON.parse(localStorage.getItem("trailerLength"));
+        this.trailerWidth = JSON.parse(localStorage.getItem("trailerWidth"));
+        this.palletLength = JSON.parse(localStorage.getItem("palletLength"));
+        this.palletWidth = JSON.parse(localStorage.getItem("palletWidth"));
+        this.numberOfPallets = JSON.parse(
+          localStorage.getItem("numberOfPallets")
+        );
+        this.sort = JSON.parse(localStorage.getItem("sort"));
+      } else {
+        this.resetState();
+      }
     },
     resetState() {
       (this.trailerLength = 13.6),
