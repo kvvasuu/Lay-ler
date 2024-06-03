@@ -68,8 +68,7 @@ export default {
     },
     showName() {
       if (this.pallet.length >= 0.8 && this.pallet.width >= 0.8) {
-        console.log(this.pallet.name);
-        console.log(this.pallet.color);
+        console.log(this.pallet);
         return this.pallet.name;
       }
     },
