@@ -317,12 +317,10 @@ export default {
   },
   computed: {
     passPallets() {
-      console.log(this.pallets);
       return this.pallets;
     },
   },
   created() {
-    console.log(this.pallets);
     this.loadState();
   },
 };
