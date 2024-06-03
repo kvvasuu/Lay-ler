@@ -318,7 +318,7 @@ export default {
       return this.pallets;
     },
   },
-  beforeMount() {
+  mounted() {
     this.loadState();
   },
 };
