@@ -319,9 +319,12 @@ export default {
     },
   },
   mounted() {
-    this.calculateNumberOfPallets();
-    this.arrangePallets();
-    this.loadState();
+    if (localStorage.getItem("pallets")) {
+      this.loadState();
+    } else {
+      this.calculateNumberOfPallets();
+      this.arrangePallets();
+    }
   },
 };
 </script>
