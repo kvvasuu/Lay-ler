@@ -12,7 +12,6 @@
           type="text"
           class="name-input"
           v-model="palletName"
-          ref="palletNameInput"
           placeholder="Name"
         />
       </div>
@@ -185,9 +184,6 @@ export default {
         this.palletWidth = 0.4;
       }
     },
-  },
-  mounted() {
-    this.$refs.palletNameInput.focus();
   },
 };
 </script>
