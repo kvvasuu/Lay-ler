@@ -498,13 +498,9 @@ export default {
   transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
 }
 
-.button-sort:hover {
+.button-sort:active {
   color: rgb(241, 165, 94);
   border: 1.5px solid rgb(241, 165, 94);
-  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
-}
-
-.button-sort:active {
   transform: translate(0, 1px);
 }
 
@@ -541,6 +537,11 @@ export default {
   text-align: center;
   font-size: 20px;
   color: #bdbdbd;
+}
+
+.trailer-size:focus {
+  color: rgb(241, 165, 94);
+  filter: drop-shadow(0 0 1px rgb(160, 113, 70));
 }
 
 .trailer-size:focus {
@@ -589,6 +590,14 @@ export default {
   }
   .state-button {
     margin: 0.2rem;
+  }
+}
+
+@media (hover: hover) {
+  .button-sort:hover {
+    color: rgb(241, 165, 94);
+    border: 1.5px solid rgb(241, 165, 94);
+    filter: drop-shadow(0 0 1px rgb(160, 113, 70));
   }
 }
 </style>
