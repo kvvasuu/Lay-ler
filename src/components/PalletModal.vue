@@ -433,16 +433,19 @@ export default {
   transform: scale(0.9);
 }
 
-@media screen and (max-width: 1000px) {
-  .pallet-modal-content {
-    width: auto;
-  }
+@media screen and (max-width: 640px) {
   .pallet-input-arrow-up,
   .pallet-input-arrow-down {
     display: none;
   }
   .pallet-input {
     width: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .pallet-modal-content {
+    width: auto;
   }
   .name-input {
     margin: 0.6rem 0.2rem 0.6rem 0.2rem;
