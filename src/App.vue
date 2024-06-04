@@ -592,11 +592,10 @@ export default {
   }
 }
 
-input {
-  border-radius: 0;
-}
-
 input[type="number"] {
+  appearance: none;
   -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0px;
 }
 </style>
