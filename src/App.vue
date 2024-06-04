@@ -112,6 +112,7 @@
       :pallets="passPallets"
       :sort="sort"
       :rotate="mobile"
+      @unloading="(bool) => (unloading = bool)"
     ></trailer>
     <input
       class="trailer-length trailer-size"
@@ -129,6 +130,20 @@
       max="4"
       step="0.01"
     />
+    <Transition name="doorOpen">
+      <div
+        class="door-left"
+        :style="{ height: trailerWidth / 2 + 0.2 + 'rem' }"
+        v-if="unloading"
+      ></div>
+    </Transition>
+    <Transition name="doorOpen">
+      <div
+        class="door-right"
+        :style="{ height: trailerWidth / 2 + 0.2 + 'rem' }"
+        v-if="unloading"
+      ></div>
+    </Transition>
   </div>
   <div class="state-buttons">
     <button class="button-sort state-button" @click="resetState">Reset</button>
@@ -156,6 +171,7 @@ export default {
       interval: null,
       isMouseDown: false,
       mobile: false,
+      unloading: false,
     };
   },
   methods: {
@@ -514,6 +530,30 @@ export default {
   margin: 0.5rem;
 }
 
+.door-left {
+  right: -0.01rem;
+  top: 0;
+  position: absolute;
+  background-color: rgb(37, 31, 25);
+  box-sizing: border-box;
+  border-radius: 0.03rem;
+  width: 0.1rem;
+  transform-origin: 50% 2%;
+  rotate: -135deg;
+}
+
+.door-right {
+  right: -0.01rem;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(37, 31, 25);
+  box-sizing: border-box;
+  border-radius: 0.03rem;
+  width: 0.1rem;
+  transform-origin: 50% 98%;
+  rotate: 135deg;
+}
+
 .trailer-length {
   position: absolute;
   bottom: -32px;
@@ -599,5 +639,16 @@ export default {
     border: 1.5px solid rgb(241, 165, 94);
     filter: drop-shadow(0 0 1px rgb(160, 113, 70));
   }
+}
+
+.doorOpen-enter-active,
+.doorOpen-leave-active {
+  transition: all 1s ease;
+}
+
+.doorOpen-enter-from,
+.doorOpen-leave-to {
+  rotate: 0deg;
+  opacity: 0;
 }
 </style>

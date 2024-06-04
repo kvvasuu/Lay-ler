@@ -32,7 +32,7 @@ export default {
     Pallet,
   },
   props: ["trailerLength", "trailerWidth", "pallets", "sort", "rotate"],
-  emits: ["update-all-pallets"],
+  emits: ["update-all-pallets", "unloading"],
   data() {
     return {
       lastPalletPosition: 0,
@@ -70,10 +70,12 @@ export default {
           this.unloading = true;
           this.pallets.pop();
           this.calculateNumberOfPallets();
+          this.$emit("unloading", this.unloading);
         } else {
           this.unloading = false;
+          this.$emit("unloading", this.unloading);
         }
-      }, 600);
+      }, 200);
     },
     updateAllPallets(pallet) {
       this.pallets.map((el) => {
