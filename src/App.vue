@@ -111,6 +111,7 @@
       :trailerWidth="trailerWidth"
       :pallets="passPallets"
       :sort="sort"
+      :rotate="mobile"
     ></trailer>
     <input
       class="trailer-length trailer-size"
@@ -144,16 +145,17 @@ export default {
   },
   data() {
     return {
-      trailerLength: 13.6,
-      trailerWidth: 2.45,
-      palletLength: 1.2,
-      palletWidth: 0.8,
-      numberOfPallets: 7,
+      trailerLength: 0,
+      trailerWidth: 0,
+      palletLength: 0,
+      palletWidth: 0,
+      numberOfPallets: 0,
       pallets: [],
       step: 0.1,
       sort: false,
       interval: null,
       isMouseDown: false,
+      mobile: false,
     };
   },
   methods: {
@@ -267,11 +269,27 @@ export default {
         (this.palletWidth = 0.8),
         (this.numberOfPallets = 7),
         (this.sort = false);
+      if (this.mobile) {
+        this.palletLength = 0.8;
+        this.palletWidth = 1.2;
+      }
       this.arrangePallets();
     },
     mouseUp() {
       this.isMouseDown = false;
       clearInterval(this.interval);
+    },
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) ||
+        window.innerWidth <= 1000
+      ) {
+        this.mobile = true;
+      } else {
+        this.mobile = false;
+      }
     },
   },
   watch: {
@@ -321,7 +339,11 @@ export default {
     },
   },
   created() {
+    window.addEventListener("resize", this.isMobile);
     this.loadState();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.isMobile);
   },
 };
 </script>
@@ -540,13 +562,31 @@ export default {
   margin: 0 0 0 0.2rem;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 640px) {
   .form-inputs {
     flex-direction: column;
   }
   .pallet-input-arrow-up,
   .pallet-input-arrow-down {
     display: none;
+  }
+  .state-buttons {
+    margin: auto;
+    margin-top: 0.6rem;
+  }
+
+  .pallet-input-group {
+    margin: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .state-buttons {
+    margin: auto;
+    margin-top: 0.6rem;
+  }
+  .state-button {
+    margin: 0.2rem;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="trailer"
-    :style="{ height: trailerWidth + 'rem', width: trailerLength + 'rem' }"
+    :style="{ height: passHeight + 'rem', width: passWidth + 'rem' }"
     ref="trailer"
   >
     <TransitionGroup name="fade">
@@ -15,6 +15,7 @@
         ref="pallets"
         :style="{ 'background-color': pallet.color }"
         @update-all-pallets="(pallet) => updateAllPallets(pallet)"
+        :rotate="rotate"
       ></pallet>
     </TransitionGroup>
   </div>
@@ -27,7 +28,7 @@ export default {
   components: {
     Pallet,
   },
-  props: ["trailerLength", "trailerWidth", "pallets", "sort"],
+  props: ["trailerLength", "trailerWidth", "pallets", "sort", "rotate"],
   emits: ["update-all-pallets"],
   data() {
     return {
@@ -73,6 +74,14 @@ export default {
       this.sortPallets();
     },
   },
+  computed: {
+    passHeight() {
+      return !this.rotate ? this.trailerWidth : this.trailerLength;
+    },
+    passWidth() {
+      return !this.rotate ? this.trailerLength : this.trailerWidth;
+    },
+  },
 };
 </script>
 
@@ -109,5 +118,19 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .trailer {
+    position: relative;
+    background-color: rgb(97, 82, 68);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    border: 0.08rem solid rgb(37, 31, 25);
+  }
 }
 </style>
