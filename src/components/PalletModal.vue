@@ -452,4 +452,11 @@ export default {
     max-width: 3rem;
   }
 }
+
+input[type="text"] {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0px;
+}
 </style>

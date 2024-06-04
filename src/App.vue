@@ -591,11 +591,4 @@ export default {
     margin: 0.2rem;
   }
 }
-
-input {
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
-  -webkit-border-radius: 0px;
-}
 </style>
