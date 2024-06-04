@@ -280,12 +280,12 @@ export default {
       clearInterval(this.interval);
     },
     isMobile() {
-      width = window.innerWidth > 0 ? window.innerWidth : screen.width;
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
         ) ||
-        width <= 1000
+        window.innerWidth <= 1000 ||
+        window.screenWidth <= 1000
       ) {
         this.mobile = true;
       } else {
@@ -340,6 +340,7 @@ export default {
     },
   },
   created() {
+    this.isMobile();
     window.addEventListener("resize", this.isMobile);
     this.loadState();
   },
