@@ -123,7 +123,7 @@ export default {
   position: absolute;
   right: 0.1rem;
   bottom: 0.05rem;
-  animation: blink 2s infinite 0.6s;
+  animation: blink 2s infinite 1s;
   color: #efefef;
 }
 
@@ -140,7 +140,7 @@ export default {
 }
 
 .pallet {
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
   border: 1px solid rgb(97, 82, 68);
   border-radius: 0.05rem;
   box-sizing: border-box;

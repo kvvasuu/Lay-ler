@@ -132,15 +132,15 @@
     />
     <Transition name="doorOpen">
       <div
-        class="door-left"
-        :style="{ height: trailerWidth / 2 + 0.2 + 'rem' }"
+        :class="{ 'door-left-mobile': mobile, 'door-left': !mobile }"
+        :style="doorStyle"
         v-if="unloading"
       ></div>
     </Transition>
     <Transition name="doorOpen">
       <div
-        class="door-right"
-        :style="{ height: trailerWidth / 2 + 0.2 + 'rem' }"
+        :class="{ 'door-right-mobile': mobile, 'door-right': !mobile }"
+        :style="doorStyle"
         v-if="unloading"
       ></div>
     </Transition>
@@ -354,6 +354,19 @@ export default {
     passPallets() {
       return this.pallets;
     },
+    doorStyle() {
+      if (!this.mobile) {
+        return {
+          width: "0.1rem",
+          height: this.trailerWidth / 2 + 0.2 + "rem",
+        };
+      } else {
+        return {
+          height: "0.1rem",
+          width: this.trailerWidth / 2 + 0.2 + "rem",
+        };
+      }
+    },
   },
   created() {
     this.isMobile();
@@ -537,9 +550,19 @@ export default {
   background-color: rgb(37, 31, 25);
   box-sizing: border-box;
   border-radius: 0.03rem;
-  width: 0.1rem;
   transform-origin: 50% 2%;
   rotate: -135deg;
+}
+
+.door-left-mobile {
+  left: -0.01rem;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(37, 31, 25);
+  box-sizing: border-box;
+  border-radius: 0.03rem;
+  transform-origin: 2% 50%;
+  rotate: 135deg;
 }
 
 .door-right {
@@ -549,9 +572,19 @@ export default {
   background-color: rgb(37, 31, 25);
   box-sizing: border-box;
   border-radius: 0.03rem;
-  width: 0.1rem;
   transform-origin: 50% 98%;
   rotate: 135deg;
+}
+
+.door-right-mobile {
+  right: 0.01rem;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(37, 31, 25);
+  box-sizing: border-box;
+  border-radius: 0.03rem;
+  transform-origin: 98% 50%;
+  rotate: -135deg;
 }
 
 .trailer-length {
