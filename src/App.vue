@@ -591,4 +591,12 @@ export default {
     margin: 0.2rem;
   }
 }
+
+input {
+  border-radius: 0;
+}
+
+input[type="number"] {
+  -webkit-appearance: none;
+}
 </style>
