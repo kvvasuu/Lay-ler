@@ -277,7 +277,7 @@ export default {
 
 .pallet-input {
   outline: none !important;
-  background-color: transparent;
+  background-color: #343435;
   border: 1px solid #bdbdbd;
   border-radius: 2rem;
   padding: 0.14rem 0.1rem 0.08rem 0.1rem;
@@ -309,7 +309,7 @@ export default {
   border-radius: 20px;
   top: -20%;
   left: 15%;
-  background-color: #2a2933;
+  background-color: #343435;
   cursor: default;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -321,7 +321,7 @@ export default {
 }
 
 .button-set {
-  background-color: transparent;
+  background-color: #343435;
   cursor: pointer;
   border: 1px solid #bdbdbd;
   border-radius: 2rem;
