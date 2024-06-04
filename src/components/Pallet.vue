@@ -4,6 +4,7 @@
     :style="{
       height: passHeight + 'rem',
       width: passWidth + 'rem',
+      'background-color': colorCompute,
     }"
   >
     <div
@@ -76,6 +77,9 @@ export default {
     },
     passWidth() {
       return !this.rotate ? this.pallet.length : this.pallet.width;
+    },
+    colorCompute() {
+      return this.pallet.color;
     },
   },
 };

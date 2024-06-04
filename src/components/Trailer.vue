@@ -103,7 +103,7 @@ export default {
 <style scoped>
 .trailer {
   position: relative;
-  background-color: rgb(97, 82, 68);
+  background-color: #615244;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -144,6 +144,19 @@ export default {
   box-sizing: border-box;
   z-index: inherit;
   margin: auto;
+}
+
+.pallet::after {
+  display: block;
+  content: "";
+  border-radius: 0.03rem;
+  background: radial-gradient(
+    circle,
+    rgba(223, 163, 108, 0) 0%,
+    rgba(0, 0, 0, 0.30015756302521013) 100%
+  );
+  width: 100%;
+  height: 100%;
 }
 
 .fade-enter-active,
