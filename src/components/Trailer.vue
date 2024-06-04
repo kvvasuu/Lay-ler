@@ -18,6 +18,9 @@
         :rotate="rotate"
       ></pallet>
     </TransitionGroup>
+    <Transition name="fade"
+      ><div v-if="unloading" class="unloading">Unloading...</div></Transition
+    >
   </div>
 </template>
 
@@ -34,6 +37,7 @@ export default {
     return {
       lastPalletPosition: 0,
       trailerRightBorderPosition: 0,
+      unloading: false,
     };
   },
   methods: {
@@ -45,18 +49,29 @@ export default {
       }, 500);
     },
     async calculateNumberOfPallets() {
-      this.trailerRightBorderPosition =
-        this.$refs.trailer.getBoundingClientRect().right;
+      !this.rotate
+        ? (this.trailerRightBorderPosition =
+            this.$refs.trailer.getBoundingClientRect().right)
+        : (this.trailerRightBorderPosition =
+            this.$refs.trailer.getBoundingClientRect().bottom);
 
       setTimeout(() => {
-        this.lastPalletPosition =
-          this.$refs.pallets[
-            this.$refs.pallets.length - 1
-          ].$el.getBoundingClientRect().right;
+        !this.rotate
+          ? (this.lastPalletPosition =
+              this.$refs.pallets[
+                this.$refs.pallets.length - 1
+              ].$el.getBoundingClientRect().right)
+          : (this.lastPalletPosition =
+              this.$refs.pallets[
+                this.$refs.pallets.length - 1
+              ].$el.getBoundingClientRect().bottom);
 
         if (this.lastPalletPosition > this.trailerRightBorderPosition) {
+          this.unloading = true;
           this.pallets.pop();
           this.calculateNumberOfPallets();
+        } else {
+          this.unloading = false;
         }
       }, 600);
     },
@@ -99,6 +114,27 @@ export default {
   border: 0.08rem solid rgb(37, 31, 25);
   border-radius: 0.08rem;
   padding: 1px;
+  overflow: hidden;
+}
+
+.unloading {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 0.05rem;
+  animation: blink 2s infinite 0.6s;
+  color: #efefef;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 
 .pallet {
@@ -131,6 +167,9 @@ export default {
     align-content: flex-start;
     flex-wrap: wrap;
     border: 0.08rem solid rgb(37, 31, 25);
+  }
+  .unloading {
+    left: 0.1rem;
   }
 }
 </style>
