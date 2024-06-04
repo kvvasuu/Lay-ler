@@ -33,18 +33,6 @@ body {
   }
 }
 
-@media screen and (max-width: 1060px) {
-  :root {
-    font-size: 48px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  :root {
-    font-size: 64px;
-  }
-}
-
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }

@@ -217,8 +217,9 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 10rem;
   height: 10rem;
+  width: 10rem;
+  margin: 0.2rem;
   border-radius: 0.6rem;
   background-color: rgba(54, 54, 56, 0.842);
 }
@@ -275,7 +276,7 @@ export default {
 
 .pallet-input-group {
   position: relative;
-  margin: 0.5rem;
+  margin: 0.2rem;
 }
 
 .pallet-input {
@@ -434,5 +435,22 @@ export default {
 
 .arrow:active {
   transform: scale(0.9);
+}
+
+@media screen and (max-width: 1000px) {
+  .pallet-modal-content {
+    width: auto;
+  }
+  .pallet-input-arrow-up,
+  .pallet-input-arrow-down {
+    display: none;
+  }
+  .pallet-input {
+    width: 1.4rem;
+  }
+  .name-input {
+    margin: 0.6rem 0.2rem 0.6rem 0.2rem;
+    max-width: 3rem;
+  }
 }
 </style>

@@ -2,15 +2,15 @@
   <div
     class="outer-pallet"
     :style="{
-      height: pallet.width + 'rem',
-      width: pallet.length + 'rem',
+      height: passHeight + 'rem',
+      width: passWidth + 'rem',
     }"
   >
     <div
       class="inner-pallet"
       :style="{
-        height: pallet.width + 'rem',
-        width: pallet.length + 'rem',
+        height: passHeight + 'rem',
+        width: passWidth + 'rem',
       }"
       @click="togglePalletSizeModal"
     >
@@ -43,7 +43,7 @@ export default {
   components: {
     PalletModal,
   },
-  props: ["pallet"],
+  props: ["pallet", "rotate"],
   emits: ["sort", "update-pallet", "update-all-pallets"],
   data() {
     return {
@@ -70,6 +70,12 @@ export default {
       if (this.pallet.length >= 0.8 && this.pallet.width >= 0.8) {
         return this.pallet.name;
       }
+    },
+    passHeight() {
+      return !this.rotate ? this.pallet.width : this.pallet.length;
+    },
+    passWidth() {
+      return !this.rotate ? this.pallet.length : this.pallet.width;
     },
   },
 };
