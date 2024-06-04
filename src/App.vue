@@ -592,7 +592,7 @@ export default {
   }
 }
 
-input[type="number"] {
+input {
   appearance: none;
   -webkit-appearance: none;
   border-radius: 0;
