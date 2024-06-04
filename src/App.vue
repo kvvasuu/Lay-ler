@@ -334,9 +334,9 @@ export default {
 }
 
 .description {
-  width: 10rem;
+  max-width: 10rem;
   text-align: center;
-  margin: 0 0 0.6rem 0;
+  margin: 0 0.6rem 0.6rem 0.6rem;
 }
 
 .form-container {
@@ -540,15 +540,13 @@ export default {
   margin: 0 0 0 0.2rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .form-inputs {
     flex-direction: column;
   }
-}
-
-/* @media screen and (max-width: 800px) {
-  .trailer-container {
-    rotate: 90deg;
+  .pallet-input-arrow-up,
+  .pallet-input-arrow-down {
+    display: none;
   }
-} */
+}
 </style>
