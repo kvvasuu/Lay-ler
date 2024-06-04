@@ -149,6 +149,11 @@
     <button class="button-sort state-button" @click="resetState">Reset</button>
     <button class="button-sort state-button" @click="saveState">Save</button>
   </div>
+  <Transition name="bounce"
+    ><div v-if="saveStateModal" class="saved-state-modal">
+      Layout saved!
+    </div></Transition
+  >
 </template>
 
 <script>
@@ -172,6 +177,7 @@ export default {
       isMouseDown: false,
       mobile: false,
       unloading: false,
+      saveStateModal: false,
     };
   },
   methods: {
@@ -254,6 +260,14 @@ export default {
         JSON.stringify(this.numberOfPallets)
       );
       localStorage.setItem("sort", JSON.stringify(this.sort));
+      if (!this.saveStateModal) {
+        this.saveStateModal = true;
+      }
+      setTimeout(() => {
+        if (this.saveStateModal) {
+          this.saveStateModal = false;
+        }
+      }, 2000);
     },
     async loadState() {
       if (localStorage.getItem("pallets") !== null) {
@@ -638,6 +652,23 @@ export default {
   margin: 0 0 0 0.2rem;
 }
 
+.saved-state-modal {
+  text-align: center;
+  text-justify: center;
+  padding: 0.3rem;
+  position: fixed;
+  font-size: 0.4rem;
+  background: rgb(52, 52, 53);
+  background: radial-gradient(
+    circle,
+    rgba(52, 52, 53, 1) 0%,
+    rgb(44, 44, 44) 100%
+  );
+  border: 1px solid #929292;
+  border-radius: 2rem;
+  top: 1rem;
+}
+
 @media screen and (max-width: 640px) {
   .form-inputs {
     flex-direction: column;
@@ -683,5 +714,23 @@ export default {
 .doorOpen-leave-to {
   rotate: 0deg;
   opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
