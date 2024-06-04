@@ -94,7 +94,6 @@ export default {
 
 .number {
   padding: 2px;
-  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
@@ -115,19 +114,12 @@ export default {
   left: 5%;
   top: 50%;
   transform: translate(0, -50%);
-  opacity: 0;
   z-index: 2;
   width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: opacity 0.3s ease;
-}
-
-.inner-pallet:hover .dimensions,
-.inner-pallet:hover .number,
-.inner-pallet:hover .name {
-  opacity: 1;
 }
 
 .fade-enter-active,
@@ -138,5 +130,17 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media (hover: hover) {
+  .inner-pallet:hover .dimensions,
+  .inner-pallet:hover .number,
+  .inner-pallet:hover .name {
+    opacity: 1;
+  }
+  .number,
+  .name {
+    opacity: 0;
+  }
 }
 </style>
