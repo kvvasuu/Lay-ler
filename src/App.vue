@@ -280,11 +280,12 @@ export default {
       clearInterval(this.interval);
     },
     isMobile() {
+      width = window.innerWidth > 0 ? window.innerWidth : screen.width;
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
         ) ||
-        window.innerWidth <= 1000
+        width <= 1000
       ) {
         this.mobile = true;
       } else {
