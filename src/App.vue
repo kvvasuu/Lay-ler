@@ -314,9 +314,9 @@ export default {
         this.palletLength = 0.8;
         this.palletWidth = 1.2;
       }
+      this.arrangePallets();
       this.checkPalletLength();
       this.checkPalletWidth();
-      this.arrangePallets();
     },
     mouseUp() {
       this.isMouseDown = false;
