@@ -151,12 +151,12 @@ export default {
 }
 
 .pallet {
-  transition: all 0.1s ease;
   border: 1px solid rgb(97, 82, 68);
   border-radius: 0.05rem;
   box-sizing: border-box;
   z-index: inherit;
   margin: auto;
+  transition: all 0.2s ease;
 }
 
 .pallet::after {
