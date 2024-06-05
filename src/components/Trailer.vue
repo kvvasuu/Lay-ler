@@ -70,10 +70,10 @@ export default {
           this.unloading = true;
           this.pallets.pop();
           this.calculateNumberOfPallets();
-          this.$emit("unloading", this.unloading);
+          this.$emit("unloading", this.unloading, this.pallets.length);
         } else {
           this.unloading = false;
-          this.$emit("unloading", this.unloading);
+          this.$emit("unloading", this.unloading, this.pallets.length);
         }
       }, 200);
     },
@@ -89,6 +89,18 @@ export default {
   watch: {
     sort() {
       this.sortPallets();
+    },
+    pallets: {
+      handler() {
+        this.calculateNumberOfPallets();
+      },
+      deep: true,
+    },
+    trailerLength() {
+      this.calculateNumberOfPallets();
+    },
+    trailerWidth() {
+      this.calculateNumberOfPallets();
     },
   },
   computed: {
@@ -168,7 +180,6 @@ export default {
 
 .fade-enter-from,
 .fade-leave-to {
-  transform: translateX(14rem);
   opacity: 0;
 }
 
