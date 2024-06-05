@@ -70,10 +70,10 @@ export default {
           this.unloading = true;
           this.pallets.pop();
           this.calculateNumberOfPallets();
-          this.$emit("unloading", this.unloading);
+          this.$emit("unloading", this.unloading, this.pallets.length);
         } else {
           this.unloading = false;
-          this.$emit("unloading", this.unloading);
+          this.$emit("unloading", this.unloading, this.pallets.length);
         }
       }, 200);
     },
@@ -84,11 +84,22 @@ export default {
         el.name = pallet.name;
         el.color = pallet.color;
       });
+      this.$emit("update-all-pallets", pallet);
     },
   },
   watch: {
-    sort() {
-      this.sortPallets();
+    sort() {},
+    pallets: {
+      handler() {
+        this.sortPallets();
+      },
+      deep: true,
+    },
+    trailerLength() {
+      this.calculateNumberOfPallets();
+    },
+    trailerWidth() {
+      this.calculateNumberOfPallets();
     },
   },
   computed: {
@@ -168,7 +179,6 @@ export default {
 
 .fade-enter-from,
 .fade-leave-to {
-  transform: translateX(14rem);
   opacity: 0;
 }
 

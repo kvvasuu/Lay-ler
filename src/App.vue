@@ -18,6 +18,7 @@
           min="0.4"
           max="13.6"
           class="pallet-input"
+          @blur="checkPalletLength"
         /><label class="pallet-input-label" for="palletLength">Length:</label>
         <div
           class="pallet-input-arrow-up"
@@ -46,6 +47,7 @@
           min="0.4"
           max="2.4"
           class="pallet-input"
+          @blur="checkPalletWidth"
         /><label class="pallet-input-label" for="palletWidth">Width:</label>
         <div
           class="pallet-input-arrow-up"
@@ -112,7 +114,13 @@
       :pallets="passPallets"
       :sort="sort"
       :rotate="mobile"
-      @unloading="(bool) => (unloading = bool)"
+      @unloading="
+        (bool, length) => (
+          (unloading = bool),
+          ((numberOfPallets = length), (currentPalletNumber = length))
+        )
+      "
+      @update-all-pallets="(pallet) => updateInputs(pallet)"
     ></trailer>
     <input
       class="trailer-length trailer-size"
@@ -170,6 +178,7 @@ export default {
       palletLength: 0,
       palletWidth: 0,
       numberOfPallets: 0,
+      currentPalletNumber: 0,
       pallets: [],
       step: 0.1,
       sort: false,
@@ -182,27 +191,29 @@ export default {
   },
   methods: {
     arrangePallets() {
-      this.calculateNumberOfPallets();
-      this.pallets = [];
-      let temp = this.numberOfPallets;
-      let number = 0;
-      while (temp > 0) {
-        this.pallets.push({
-          length: this.palletLength,
-          width: this.palletWidth,
-          number: number,
-          name: "",
-          color: "#dfa36c",
-        });
-        temp--;
-        number++;
+      if (this.numberOfPallets > 250) {
+        this.numberOfPallets = 250;
       }
-    },
-    calculateNumberOfPallets() {
-      let maxRows = Math.floor(this.trailerWidth / this.palletWidth);
-      let maxCols = Math.floor(this.trailerLength / this.palletLength);
-      if (maxCols * maxRows < this.numberOfPallets) {
-        this.numberOfPallets = maxCols * maxRows;
+      let temp = this.pallets.length;
+
+      if (temp < this.numberOfPallets) {
+        while (temp < this.numberOfPallets) {
+          this.pallets.push({
+            length: this.palletLength,
+            width: this.palletWidth,
+            number: this.currentPalletNumber,
+            name: "",
+            color: "#dfa36c",
+          });
+          temp++;
+          this.currentPalletNumber++;
+        }
+      } else if (this.numberOfPallets < temp) {
+        while (temp > this.numberOfPallets) {
+          this.pallets.pop();
+          temp--;
+          this.currentPalletNumber--;
+        }
       }
     },
     increaseInput(ref) {
@@ -308,6 +319,8 @@ export default {
     mouseUp() {
       this.isMouseDown = false;
       clearInterval(this.interval);
+      this.checkPalletLength();
+      this.checkPalletWidth();
     },
     isMobile() {
       if (
@@ -322,35 +335,56 @@ export default {
         this.mobile = false;
       }
     },
-  },
-  watch: {
-    numberOfPallets() {
-      this.arrangePallets();
-    },
-    palletLength() {
+    checkPalletLength() {
       if (this.palletLength > this.trailerLength) {
         this.palletLength = this.trailerLength;
       }
       if (this.palletLength < 0.4) {
         this.palletLength = 0.4;
       }
-      this.arrangePallets();
+      if (
+        this.pallets.every(
+          (el) =>
+            el.length === this.pallets[0].length &&
+            this.pallets[0].length !== this.palletLength
+        )
+      ) {
+        this.pallets.map((el) => {
+          el.length = this.palletLength;
+        });
+      }
     },
-    palletWidth() {
+    checkPalletWidth() {
       if (this.palletWidth > this.trailerWidth) {
         this.palletWidth = this.trailerWidth;
       }
       if (this.palletWidth < 0.4) {
         this.palletWidth = 0.4;
       }
+      if (
+        this.pallets.every((el) => el.width === this.pallets[0].width) &&
+        this.pallets[0].width !== this.palletWidth
+      ) {
+        this.pallets.map((el) => {
+          el.width = this.palletWidth;
+        });
+      }
+    },
+    updateInputs(pallet) {
+      this.palletLength = pallet.length;
+      this.palletWidth = pallet.width;
+    },
+  },
+  watch: {
+    numberOfPallets() {
       this.arrangePallets();
     },
     trailerLength() {
       if (this.trailerLength > 15) {
         this.trailerLength = 15;
       }
-      if (this.trailerLength < this.palletLength) {
-        this.palletLength = this.trailerLength;
+      if (this.trailerLength < 1) {
+        this.trailerLength = 1;
       }
       this.arrangePallets();
     },
@@ -358,8 +392,8 @@ export default {
       if (this.trailerWidth > 4) {
         this.trailerWidth = 4;
       }
-      if (this.trailerWidth < this.palletWidth) {
-        this.palletWidth = this.trailerWidth;
+      if (this.trailerWidth < 1) {
+        this.trailerWidth = 1;
       }
       this.arrangePallets();
     },
@@ -707,7 +741,7 @@ export default {
 
 .doorOpen-enter-active,
 .doorOpen-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 .doorOpen-enter-from,
