@@ -342,6 +342,17 @@ export default {
       if (this.palletLength < 0.4) {
         this.palletLength = 0.4;
       }
+      if (
+        this.pallets.every(
+          (el) =>
+            el.length === this.pallets[0].length &&
+            this.pallets[0].length !== this.palletLength
+        )
+      ) {
+        this.pallets.map((el) => {
+          el.length = this.palletLength;
+        });
+      }
     },
     checkPalletWidth() {
       if (this.palletWidth > this.trailerWidth) {
@@ -349,6 +360,14 @@ export default {
       }
       if (this.palletWidth < 0.4) {
         this.palletWidth = 0.4;
+      }
+      if (
+        this.pallets.every((el) => el.width === this.pallets[0].width) &&
+        this.pallets[0].width !== this.palletWidth
+      ) {
+        this.pallets.map((el) => {
+          el.width = this.palletWidth;
+        });
       }
     },
     updateInputs(pallet) {
@@ -722,7 +741,7 @@ export default {
 
 .doorOpen-enter-active,
 .doorOpen-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 .doorOpen-enter-from,
