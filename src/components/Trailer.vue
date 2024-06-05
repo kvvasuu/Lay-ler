@@ -163,11 +163,12 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: all 1s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
+  transform: translateX(14rem);
   opacity: 0;
 }
 
