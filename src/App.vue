@@ -314,6 +314,8 @@ export default {
         this.palletLength = 0.8;
         this.palletWidth = 1.2;
       }
+      this.checkPalletLength();
+      this.checkPalletWidth();
       this.arrangePallets();
     },
     mouseUp() {

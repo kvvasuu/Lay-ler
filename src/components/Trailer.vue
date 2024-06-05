@@ -174,11 +174,12 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
+  transform: translateY(4rem);
   opacity: 0;
 }
 
