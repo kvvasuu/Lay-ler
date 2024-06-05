@@ -84,15 +84,14 @@ export default {
         el.name = pallet.name;
         el.color = pallet.color;
       });
+      this.$emit("update-all-pallets", pallet);
     },
   },
   watch: {
-    sort() {
-      this.sortPallets();
-    },
+    sort() {},
     pallets: {
       handler() {
-        this.calculateNumberOfPallets();
+        this.sortPallets();
       },
       deep: true,
     },

@@ -120,6 +120,7 @@
           ((numberOfPallets = length), (currentPalletNumber = length))
         )
       "
+      @update-all-pallets="(pallet) => updateInputs(pallet)"
     ></trailer>
     <input
       class="trailer-length trailer-size"
@@ -190,6 +191,9 @@ export default {
   },
   methods: {
     arrangePallets() {
+      if (this.numberOfPallets > 250) {
+        this.numberOfPallets = 250;
+      }
       let temp = this.pallets.length;
 
       if (temp < this.numberOfPallets) {
@@ -346,6 +350,10 @@ export default {
       if (this.palletWidth < 0.4) {
         this.palletWidth = 0.4;
       }
+    },
+    updateInputs(pallet) {
+      this.palletLength = pallet.length;
+      this.palletWidth = pallet.width;
     },
   },
   watch: {
