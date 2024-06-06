@@ -314,9 +314,16 @@ export default {
         this.palletLength = 0.8;
         this.palletWidth = 1.2;
       }
+
       this.checkPalletLength();
       this.checkPalletWidth();
       this.arrangePallets();
+      if (this.pallets[0]) {
+        this.pallets.map((el) => {
+          el.color = "#dfa36c";
+          el.name = "";
+        });
+      }
     },
     mouseUp() {
       this.isMouseDown = false;
