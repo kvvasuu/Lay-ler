@@ -88,7 +88,9 @@ export default {
     },
   },
   watch: {
-    sort() {},
+    sort() {
+      this.sortPallets();
+    },
     pallets: {
       handler() {
         this.sortPallets();

@@ -319,10 +319,16 @@ export default {
       this.checkPalletWidth();
       this.arrangePallets();
 
+      this.currentPalletNumber = 0;
+
       if (this.pallets[0]) {
         this.pallets.map((el) => {
+          el.number = this.currentPalletNumber;
+          el.length = 1.2;
+          el.width = 0.8;
           el.color = "#dfa36c";
           el.name = "";
+          this.currentPalletNumber++;
         });
       }
     },
@@ -353,11 +359,8 @@ export default {
         this.palletLength = 0.4;
       }
       if (
-        this.pallets.every(
-          (el) =>
-            el.length === this.pallets[0].length &&
-            this.pallets[0].length !== this.palletLength
-        )
+        this.everyPalletIsTheSame() &&
+        this.pallets[0].length !== this.palletLength
       ) {
         this.pallets.map((el) => {
           el.length = this.palletLength;
@@ -372,13 +375,19 @@ export default {
         this.palletWidth = 0.4;
       }
       if (
-        this.pallets.every((el) => el.width === this.pallets[0].width) &&
+        this.everyPalletIsTheSame() &&
         this.pallets[0].width !== this.palletWidth
       ) {
         this.pallets.map((el) => {
           el.width = this.palletWidth;
         });
       }
+    },
+    everyPalletIsTheSame() {
+      return (
+        this.pallets.every((el) => el.width === this.pallets[0].width) &&
+        this.pallets.every((el) => el.length === this.pallets[0].length)
+      );
     },
     updateInputs(pallet) {
       this.palletLength = pallet.length;
