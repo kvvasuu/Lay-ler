@@ -310,27 +310,9 @@ export default {
         (this.palletWidth = 0.8),
         (this.numberOfPallets = 7),
         (this.sort = false);
-      if (this.mobile) {
-        this.palletLength = 0.8;
-        this.palletWidth = 1.2;
-      }
-
+      this.arrangePallets();
       this.checkPalletLength();
       this.checkPalletWidth();
-      this.arrangePallets();
-
-      this.currentPalletNumber = 0;
-
-      if (this.pallets[0]) {
-        this.pallets.map((el) => {
-          el.number = this.currentPalletNumber;
-          el.length = 1.2;
-          el.width = 0.8;
-          el.color = "#dfa36c";
-          el.name = "";
-          this.currentPalletNumber++;
-        });
-      }
     },
     mouseUp() {
       this.isMouseDown = false;
@@ -359,8 +341,11 @@ export default {
         this.palletLength = 0.4;
       }
       if (
-        this.everyPalletIsTheSame() &&
-        this.pallets[0].length !== this.palletLength
+        this.pallets.every(
+          (el) =>
+            el.length === this.pallets[0].length &&
+            this.pallets[0].length !== this.palletLength
+        )
       ) {
         this.pallets.map((el) => {
           el.length = this.palletLength;
@@ -375,7 +360,7 @@ export default {
         this.palletWidth = 0.4;
       }
       if (
-        this.everyPalletIsTheSame() &&
+        this.pallets.every((el) => el.width === this.pallets[0].width) &&
         this.pallets[0].width !== this.palletWidth
       ) {
         this.pallets.map((el) => {
@@ -383,13 +368,8 @@ export default {
         });
       }
     },
-    everyPalletIsTheSame() {
-      return (
-        this.pallets.every((el) => el.width === this.pallets[0].width) &&
-        this.pallets.every((el) => el.length === this.pallets[0].length)
-      );
-    },
     updateInputs(pallet) {
+      console.log(pallet);
       this.palletLength = pallet.length;
       this.palletWidth = pallet.width;
     },
