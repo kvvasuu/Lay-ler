@@ -157,7 +157,10 @@
   </div>
   <div class="state-buttons">
     <button class="button-sort state-button" @click="resetState">Reset</button>
-    <button class="button-sort state-button" @click="loadState(event)">
+    <button
+      class="button-sort state-button"
+      @click="(event) => loadState(event)"
+    >
       Load
     </button>
     <button class="button-sort state-button" @click="saveState">Save</button>
