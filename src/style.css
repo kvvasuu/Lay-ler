@@ -10,6 +10,12 @@
 }
 
 body {
+  background-color: #2a2933;
+  background: radial-gradient(
+    circle,
+    rgb(54, 54, 56) 30%,
+    rgb(27, 27, 27) 100%
+  );
   font-size: 0.25rem;
   margin: 0;
   display: flex;
