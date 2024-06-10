@@ -91,13 +91,14 @@ export default {
   width: 10rem;
   margin: 0.2rem;
   border-radius: 0.6rem;
-  background-color: rgba(54, 54, 56, 0.842);
+  border: 2px solid #bdbdbd;
+  background-color: rgba(54, 54, 56, 1);
 }
 
 .title {
   font-size: 0.7rem;
   font-weight: bold;
-  margin: 1.3rem 0.6rem 0rem 0.6rem;
+  margin: 1.3rem 0.6rem 0.1rem 0.6rem;
   width: 5rem;
   text-align: center;
 }
