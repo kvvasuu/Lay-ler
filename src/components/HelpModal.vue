@@ -105,15 +105,19 @@ export default {
 
 .content {
   margin: 0 0.5rem 0.5rem 0.5rem;
+  border-radius: 0.3rem;
+  background-color: rgb(60, 60, 61);
 }
 
 .section {
   font-size: 0.32rem;
   margin-bottom: 0.2rem;
+  font-weight: bold;
 }
 
 li {
   font-size: 0.24rem;
+  font-weight: normal;
 }
 
 ul {

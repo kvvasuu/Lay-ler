@@ -217,7 +217,8 @@ export default {
   width: 10rem;
   margin: 0.2rem;
   border-radius: 0.6rem;
-  background-color: rgba(54, 54, 56, 0.842);
+  border: 2px solid #c2c2c270;
+  background-color: rgba(54, 54, 56, 1);
 }
 
 .pallet-modal-inner {
