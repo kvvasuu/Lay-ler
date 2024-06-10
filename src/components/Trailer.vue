@@ -16,6 +16,10 @@
         :style="{ 'background-color': pallet.color }"
         @update-all-pallets="(pallet) => updateAllPallets(pallet)"
         :rotate="rotate"
+        @replace-pallets="
+          (draggedPallet, palletToReplace) =>
+            replacePallets(draggedPallet, palletToReplace)
+        "
       ></pallet>
     </TransitionGroup>
     <Transition name="fade"
@@ -85,6 +89,23 @@ export default {
         el.color = pallet.color;
       });
       this.$emit("update-all-pallets", pallet);
+    },
+    visualizePallets() {
+      const tempPallet = this.pallets[draggedPallet];
+      this.pallets.splice(draggedPallet, 1);
+      this.pallets.splice(palletToReplace, 0, tempPallet);
+    },
+    replacePallets(draggedPallet, palletToReplace) {
+      const draggedPalletIndex = this.pallets
+        .map((el) => el.number)
+        .indexOf(Number(draggedPallet));
+      const draggedPalletTemp = this.pallets[draggedPalletIndex];
+      const palletToReplaceIndex = this.pallets
+        .map((el) => el.number)
+        .indexOf(Number(palletToReplace));
+
+      this.pallets.splice(draggedPalletIndex, 1);
+      this.pallets.splice(palletToReplaceIndex, 0, draggedPalletTemp);
     },
   },
   watch: {

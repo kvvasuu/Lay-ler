@@ -6,14 +6,25 @@
       width: passWidth + 'rem',
       'background-color': colorCompute,
     }"
+    :class="{ 'hide-outer-pallet': hidePallet }"
+    @drop="(event) => drop(event)"
+    @dragover="(event) => allowDrop(event)"
+    @dragenter="dragEnter"
+    @dragleave="dragLeave"
+    @dragend="dragEnd"
+    :id="pallet.number"
   >
     <div
+      draggable="true"
+      @dragstart="(event) => drag(event)"
       class="inner-pallet"
       :style="{
         height: passHeight + 'rem',
         width: passWidth + 'rem',
       }"
+      :class="{ 'hide-pallet': hidePallet }"
       @click="togglePalletSizeModal"
+      :id="pallet.number + 'a'"
     >
       <div class="number">
         {{ pallet.number + 1 }}
@@ -45,10 +56,12 @@ export default {
     PalletModal,
   },
   props: ["pallet", "rotate"],
-  emits: ["sort", "update-pallet", "update-all-pallets"],
+  emits: ["sort", "update-pallet", "update-all-pallets", "replace-pallets"],
   data() {
     return {
       showPalletSizeModal: false,
+      hidePallet: false,
+      dragCounter: 0,
     };
   },
   methods: {
@@ -57,6 +70,43 @@ export default {
     },
     updatePallet() {
       this.$emit("update-pallet");
+    },
+    //drag and drop methods
+    drag(event) {
+      const palletNumber = event.target.id.replace("a", "");
+      event.dataTransfer.setData("pallet", palletNumber);
+    },
+    dragEnter(event) {
+      event.preventDefault();
+      this.hidePallet = true;
+      this.dragCounter++;
+    },
+    dragLeave(event) {
+      event.preventDefault();
+      this.dragCounter--;
+      if (this.dragCounter === 0) this.hidePallet = false;
+    },
+    dragEnd(event) {
+      event.preventDefault();
+      this.hidePallet = false;
+      this.dragCounter = 0;
+    },
+    allowDrop(event) {
+      event.preventDefault();
+    },
+    drop(event) {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("pallet");
+      this.replacePallet(data, event.target.id);
+      this.hidePallet = false;
+      this.dragCounter = 0;
+      event.dataTransfer.clearData("pallet");
+    },
+    replacePallet(draggedPallet, palletToReplace) {
+      if (draggedPallet === palletToReplace) {
+        return;
+      }
+      this.$emit("replace-pallets", draggedPallet, palletToReplace);
     },
   },
   computed: {
@@ -87,13 +137,24 @@ export default {
 
 <style scoped>
 .outer-pallet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+
+.hide-outer-pallet {
+  opacity: 0;
 }
 
 .inner-pallet {
   position: absolute;
   cursor: pointer;
   color: #efefef;
+}
+
+.hide-pallet {
+  display: none;
 }
 
 .number {

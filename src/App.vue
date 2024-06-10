@@ -310,6 +310,13 @@ export default {
         (this.palletWidth = 0.8),
         (this.numberOfPallets = 7),
         (this.sort = false);
+      this.pallets.map((el, index) => {
+        el.length = this.palletLength;
+        el.width = this.palletWidth;
+        el.name = "";
+        el.number = index;
+        el.color = "#dfa36c";
+      });
       this.arrangePallets();
       this.checkPalletLength();
       this.checkPalletWidth();
