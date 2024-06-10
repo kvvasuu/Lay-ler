@@ -157,7 +157,9 @@
   </div>
   <div class="state-buttons">
     <button class="button-sort state-button" @click="resetState">Reset</button>
-    <button class="button-sort state-button" @click="loadState">Load</button>
+    <button class="button-sort state-button" @click="loadState(event)">
+      Load
+    </button>
     <button class="button-sort state-button" @click="saveState">Save</button>
   </div>
   <Transition name="bounce"
@@ -297,7 +299,7 @@ export default {
         }
       }, 1300);
     },
-    async loadState() {
+    async loadState(event) {
       if (localStorage.getItem("pallets") !== null) {
         this.trailerLength = await JSON.parse(
           localStorage.getItem("trailerLength")
@@ -316,12 +318,14 @@ export default {
         );
         this.sort = await JSON.parse(localStorage.getItem("sort"));
         this.pallets = await JSON.parse(localStorage.getItem("pallets"));
-        this.loadStateModal = true;
-        setTimeout(() => {
-          if (this.loadStateModal) {
-            this.loadStateModal = false;
-          }
-        }, 1300);
+        if (event) {
+          this.loadStateModal = true;
+          setTimeout(() => {
+            if (this.loadStateModal) {
+              this.loadStateModal = false;
+            }
+          }, 1300);
+        }
       } else {
         this.resetState();
       }
