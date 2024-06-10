@@ -96,6 +96,7 @@ export default {
     },
     drop(event) {
       event.preventDefault();
+      event.stopPropagation();
       const data = event.dataTransfer.getData("pallet");
       this.replacePallet(data, event.target.id);
       this.hidePallet = false;

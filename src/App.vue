@@ -155,11 +155,17 @@
   </div>
   <div class="state-buttons">
     <button class="button-sort state-button" @click="resetState">Reset</button>
+    <button class="button-sort state-button" @click="loadState">Load</button>
     <button class="button-sort state-button" @click="saveState">Save</button>
   </div>
   <Transition name="bounce"
     ><div v-if="saveStateModal" class="saved-state-modal">
       Layout saved!
+    </div></Transition
+  >
+  <Transition name="bounce"
+    ><div v-if="loadStateModal" class="saved-state-modal">
+      Layout loaded!
     </div></Transition
   >
 </template>
@@ -187,6 +193,7 @@ export default {
       mobile: false,
       unloading: false,
       saveStateModal: false,
+      loadStateModal: false,
     };
   },
   methods: {
@@ -234,12 +241,16 @@ export default {
           this.increaseInput(ref);
           this.interval = setInterval(() => {
             this.increaseInput(ref);
+            this.checkPalletLength();
+            this.checkPalletWidth();
           }, 300);
           setTimeout(() => {
             clearInterval(this.interval);
             if (this.isMouseDown) {
               this.interval = setInterval(() => {
                 this.increaseInput(ref);
+                this.checkPalletLength();
+                this.checkPalletWidth();
               }, 100);
             }
           }, 1000);
@@ -248,12 +259,16 @@ export default {
           this.decreaseInput(ref);
           this.interval = setInterval(() => {
             this.decreaseInput(ref);
+            this.checkPalletLength();
+            this.checkPalletWidth();
           }, 300);
           setTimeout(() => {
             clearInterval(this.interval);
             if (this.isMouseDown) {
               this.interval = setInterval(() => {
                 this.decreaseInput(ref);
+                this.checkPalletLength();
+                this.checkPalletWidth();
               }, 100);
             }
           }, 1000);
@@ -278,7 +293,7 @@ export default {
         if (this.saveStateModal) {
           this.saveStateModal = false;
         }
-      }, 2000);
+      }, 1300);
     },
     async loadState() {
       if (localStorage.getItem("pallets") !== null) {
@@ -299,6 +314,12 @@ export default {
         );
         this.sort = await JSON.parse(localStorage.getItem("sort"));
         this.pallets = await JSON.parse(localStorage.getItem("pallets"));
+        this.loadStateModal = true;
+        setTimeout(() => {
+          if (this.loadStateModal) {
+            this.loadStateModal = false;
+          }
+        }, 1300);
       } else {
         this.resetState();
       }

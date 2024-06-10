@@ -90,11 +90,6 @@ export default {
       });
       this.$emit("update-all-pallets", pallet);
     },
-    visualizePallets() {
-      const tempPallet = this.pallets[draggedPallet];
-      this.pallets.splice(draggedPallet, 1);
-      this.pallets.splice(palletToReplace, 0, tempPallet);
-    },
     replacePallets(draggedPallet, palletToReplace) {
       const draggedPalletIndex = this.pallets
         .map((el) => el.number)
