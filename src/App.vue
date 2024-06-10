@@ -382,38 +382,42 @@ export default {
       }
     },
     checkPalletLength() {
-      if (this.palletLength > this.trailerLength) {
-        this.palletLength = this.trailerLength;
-      }
-      if (this.palletLength < 0.4) {
-        this.palletLength = 0.4;
-      }
-      if (
-        this.pallets.every(
-          (el) =>
-            el.length === this.pallets[0].length &&
-            this.pallets[0].length !== this.palletLength
-        )
-      ) {
-        this.pallets.map((el) => {
-          el.length = this.palletLength;
-        });
+      if (this.pallets.length > 0) {
+        if (this.palletLength > this.trailerLength) {
+          this.palletLength = this.trailerLength;
+        }
+        if (this.palletLength < 0.4) {
+          this.palletLength = 0.4;
+        }
+        if (
+          this.pallets.every(
+            (el) =>
+              el.length === this.pallets[0].length &&
+              this.pallets[0].length !== this.palletLength
+          )
+        ) {
+          this.pallets.map((el) => {
+            el.length = this.palletLength;
+          });
+        }
       }
     },
     checkPalletWidth() {
-      if (this.palletWidth > this.trailerWidth) {
-        this.palletWidth = this.trailerWidth;
-      }
-      if (this.palletWidth < 0.4) {
-        this.palletWidth = 0.4;
-      }
-      if (
-        this.pallets.every((el) => el.width === this.pallets[0].width) &&
-        this.pallets[0].width !== this.palletWidth
-      ) {
-        this.pallets.map((el) => {
-          el.width = this.palletWidth;
-        });
+      if (this.pallets.length > 0) {
+        if (this.palletWidth > this.trailerWidth) {
+          this.palletWidth = this.trailerWidth;
+        }
+        if (this.palletWidth < 0.4) {
+          this.palletWidth = 0.4;
+        }
+        if (
+          this.pallets.every((el) => el.width === this.pallets[0].width) &&
+          this.pallets[0].width !== this.palletWidth
+        ) {
+          this.pallets.map((el) => {
+            el.width = this.palletWidth;
+          });
+        }
       }
     },
     updateInputs(pallet) {

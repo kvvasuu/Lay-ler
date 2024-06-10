@@ -74,25 +74,34 @@
           </div>
         </div>
       </div>
-      <color-picker
+      <ColorPicker
         :color="this.palletColor"
         @update-color="(color) => (palletColor = color)"
-      ></color-picker>
+      ></ColorPicker>
       <div class="form-button">
         <button class="button-set" @click="updatePallet">Set</button>
         <button class="button-set" @click="updateAllPallets">Set all</button>
-        <button class="button-delete" @click="deletePallet">Delete</button>
+        <button class="button-delete" @click="togglePalletDeleteModal">
+          Delete
+        </button>
       </div>
     </div>
+    <PalletDeleteModal
+      v-if="palletDeleteModal"
+      @delete-pallet="deletePallet"
+      @toggle-modal="togglePalletDeleteModal"
+    ></PalletDeleteModal>
   </div>
 </template>
 
 <script>
 import ColorPicker from "./ColorPicker.vue";
+import PalletDeleteModal from "./PalletDeleteModal.vue";
 
 export default {
   components: {
     ColorPicker,
+    PalletDeleteModal,
   },
   props: ["pallet"],
   emits: [
@@ -109,6 +118,7 @@ export default {
       palletColor: this.pallet.color,
       interval: null,
       isMouseDown: false,
+      palletDeleteModal: false,
     };
   },
   methods: {
@@ -169,6 +179,9 @@ export default {
     mouseUp() {
       this.isMouseDown = false;
       clearInterval(this.interval);
+    },
+    togglePalletDeleteModal() {
+      this.palletDeleteModal = !this.palletDeleteModal;
     },
     deletePallet() {
       this.$emit("delete-pallet", this.pallet.number);
