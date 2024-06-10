@@ -81,6 +81,7 @@
       <div class="form-button">
         <button class="button-set" @click="updatePallet">Set</button>
         <button class="button-set" @click="updateAllPallets">Set all</button>
+        <button class="button-delete" @click="deletePallet">Delete</button>
       </div>
     </div>
   </div>
@@ -94,7 +95,12 @@ export default {
     ColorPicker,
   },
   props: ["pallet"],
-  emits: ["toggle-modal", "update-pallet", "update-all-pallets"],
+  emits: [
+    "toggle-modal",
+    "update-pallet",
+    "update-all-pallets",
+    "delete-pallet",
+  ],
   data() {
     return {
       palletLength: this.pallet.length,
@@ -120,12 +126,10 @@ export default {
     },
     increaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
       this[ref.name] = Math.round(Number(this[ref.name] + step) * 100) / 100;
     },
     decreaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
       if (this[ref.name] > 0)
         this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
     },
@@ -165,6 +169,9 @@ export default {
     mouseUp() {
       this.isMouseDown = false;
       clearInterval(this.interval);
+    },
+    deletePallet() {
+      this.$emit("delete-pallet", this.pallet.number);
     },
   },
   watch: {
@@ -336,9 +343,30 @@ export default {
   margin: 0 0.2rem 0 0.2rem;
 }
 
+.button-delete {
+  color: #cc3333;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #cc3333;
+  border-radius: 2rem;
+  padding: 0.1rem;
+  text-align: center;
+  width: 1.4rem;
+  font-size: 0.3rem;
+  font-weight: bold;
+  transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
+  margin: 0 0.2rem 0 0.2rem;
+}
+
+.button-delete:hover {
+  color: #cc3333;
+  border: 1px solid #cc3333;
+  filter: drop-shadow(0 0 1px #cc3333);
+}
+
 .button-set:hover {
   color: rgb(241, 165, 94);
-  border: 1.5px solid rgb(241, 165, 94);
+  border: 1px solid rgb(241, 165, 94);
   filter: drop-shadow(0 0 1px rgb(160, 113, 70));
 }
 

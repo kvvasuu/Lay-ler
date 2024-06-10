@@ -43,6 +43,12 @@
         @toggle-modal="togglePalletSizeModal"
         @update-pallet="updatePallet"
         @update-all-pallets="(pallet) => $emit('update-all-pallets', pallet)"
+        @delete-pallet="
+          (number) => {
+            $emit('delete-pallet', number);
+            hidePallet = true;
+          }
+        "
       ></pallet-modal>
     </transition>
   </div>
@@ -56,7 +62,13 @@ export default {
     PalletModal,
   },
   props: ["pallet", "rotate"],
-  emits: ["sort", "update-pallet", "update-all-pallets", "replace-pallets"],
+  emits: [
+    "sort",
+    "update-pallet",
+    "update-all-pallets",
+    "replace-pallets",
+    "delete-pallet",
+  ],
   data() {
     return {
       showPalletSizeModal: false,
