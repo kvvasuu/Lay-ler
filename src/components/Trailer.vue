@@ -155,6 +155,7 @@ export default {
   border-radius: 0.08rem;
   padding: 1px;
   overflow: hidden;
+  transition: all 0.5s ease;
 }
 
 .unloading {
@@ -197,17 +198,6 @@ export default {
   );
   width: 100%;
   height: 100%;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  transform: translateY(4rem);
-  opacity: 0;
 }
 
 @media screen and (max-width: 1000px) {

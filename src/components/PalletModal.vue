@@ -86,11 +86,13 @@
         </button>
       </div>
     </div>
-    <PalletDeleteModal
-      v-if="palletDeleteModal"
-      @delete-pallet="deletePallet"
-      @toggle-modal="togglePalletDeleteModal"
-    ></PalletDeleteModal>
+    <Transition name="fade">
+      <PalletDeleteModal
+        v-if="palletDeleteModal"
+        @delete-pallet="deletePallet"
+        @toggle-modal="togglePalletDeleteModal"
+      ></PalletDeleteModal>
+    </Transition>
   </div>
 </template>
 

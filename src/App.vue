@@ -182,7 +182,9 @@
       Layout loaded!
     </div></Transition
   >
-  <HelpModal v-if="helpModal" @toggle-modal="toggleHelpModal"></HelpModal>
+  <Transition name="fade">
+    <HelpModal v-if="helpModal" @toggle-modal="toggleHelpModal"></HelpModal>
+  </Transition>
 </template>
 
 <script>
@@ -829,12 +831,6 @@ export default {
   opacity: 0;
 }
 
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
 @keyframes bounce-in {
   0% {
     transform: scale(0);

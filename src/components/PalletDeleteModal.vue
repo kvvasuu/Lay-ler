@@ -36,8 +36,6 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.185);
   backdrop-filter: blur(2px);
   cursor: default;
 }

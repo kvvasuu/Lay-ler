@@ -73,6 +73,7 @@ export default {
   border: 2px solid #bdbdbd;
   width: 1rem;
   height: 1rem;
+  transition: all 0.3s ease;
 }
 
 .colors {

@@ -200,16 +200,6 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 @media (hover: hover) {
   .inner-pallet:hover .dimensions,
   .inner-pallet:hover .number,
