@@ -6,6 +6,8 @@
     most efficient layout, saving you time and space.<br />
     The perfect solution for logistics and transportation!
   </div>
+  <img class="help-button" src="./assets/circle-info-solid.svg" alt="help" />
+
   <div class="form-container">
     <div class="form-inputs">
       <div class="pallet-input-group">
@@ -467,6 +469,22 @@ export default {
   margin: 0 0.6rem 0.6rem 0.6rem;
 }
 
+.help-button {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.5rem;
+  height: 0.5rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  margin: 0.1rem;
+}
+
+.help-button:active {
+  filter: brightness(0) saturate(100%) invert(78%) sepia(88%) saturate(1033%)
+    hue-rotate(314deg) brightness(97%) contrast(94%);
+  box-shadow: 0 0 4px rgb(160, 113, 70);
+}
+
 .form-container {
   display: flex;
   align-items: center;
@@ -730,6 +748,20 @@ export default {
   top: 1rem;
 }
 
+@media screen and (max-width: 1000px) {
+  .state-buttons {
+    margin: auto;
+    margin-top: 0.6rem;
+  }
+  .state-button {
+    margin: 0.1rem;
+  }
+  .help-button {
+    top: -0.1rem;
+    right: -0.1rem;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .form-inputs {
     flex-direction: column;
@@ -742,27 +774,21 @@ export default {
     margin: auto;
     margin-top: 0.6rem;
   }
-
   .pallet-input-group {
     margin: 0.3rem;
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .state-buttons {
-    margin: auto;
-    margin-top: 0.6rem;
-  }
-  .state-button {
-    margin: 0.2rem;
-  }
-}
-
 @media (hover: hover) {
   .button-sort:hover {
-    color: rgb(241, 165, 94);
+    color: #f1a55e;
     border: 1.5px solid rgb(241, 165, 94);
     filter: drop-shadow(0 0 1px rgb(160, 113, 70));
+  }
+  .help-button:hover {
+    filter: brightness(0) saturate(100%) invert(78%) sepia(88%) saturate(1033%)
+      hue-rotate(314deg) brightness(97%) contrast(94%);
+    box-shadow: 0 0 4px rgb(160, 113, 70);
   }
 }
 
