@@ -74,27 +74,42 @@
           </div>
         </div>
       </div>
-      <color-picker
+      <ColorPicker
         :color="this.palletColor"
         @update-color="(color) => (palletColor = color)"
-      ></color-picker>
+      ></ColorPicker>
       <div class="form-button">
         <button class="button-set" @click="updatePallet">Set</button>
         <button class="button-set" @click="updateAllPallets">Set all</button>
+        <button class="button-delete" @click="togglePalletDeleteModal">
+          Delete
+        </button>
       </div>
     </div>
+    <PalletDeleteModal
+      v-if="palletDeleteModal"
+      @delete-pallet="deletePallet"
+      @toggle-modal="togglePalletDeleteModal"
+    ></PalletDeleteModal>
   </div>
 </template>
 
 <script>
 import ColorPicker from "./ColorPicker.vue";
+import PalletDeleteModal from "./PalletDeleteModal.vue";
 
 export default {
   components: {
     ColorPicker,
+    PalletDeleteModal,
   },
   props: ["pallet"],
-  emits: ["toggle-modal", "update-pallet", "update-all-pallets"],
+  emits: [
+    "toggle-modal",
+    "update-pallet",
+    "update-all-pallets",
+    "delete-pallet",
+  ],
   data() {
     return {
       palletLength: this.pallet.length,
@@ -103,6 +118,7 @@ export default {
       palletColor: this.pallet.color,
       interval: null,
       isMouseDown: false,
+      palletDeleteModal: false,
     };
   },
   methods: {
@@ -120,12 +136,10 @@ export default {
     },
     increaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
       this[ref.name] = Math.round(Number(this[ref.name] + step) * 100) / 100;
     },
     decreaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
       if (this[ref.name] > 0)
         this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
     },
@@ -165,6 +179,12 @@ export default {
     mouseUp() {
       this.isMouseDown = false;
       clearInterval(this.interval);
+    },
+    togglePalletDeleteModal() {
+      this.palletDeleteModal = !this.palletDeleteModal;
+    },
+    deletePallet() {
+      this.$emit("delete-pallet", this.pallet.number);
     },
   },
   watch: {
@@ -213,7 +233,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 10rem;
+  height: auto;
   width: 10rem;
   margin: 0.2rem;
   border-radius: 0.6rem;
@@ -241,6 +261,7 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   text-transform: uppercase;
+  margin: 0.8rem 0 0 0;
 }
 
 .name-input {
@@ -269,6 +290,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 0.6rem 0;
 }
 
 .pallet-input-group {
@@ -333,12 +356,33 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
-  margin: 0 0.2rem 0 0.2rem;
+  margin: 0 0.2rem 0.2rem 0.2rem;
+}
+
+.button-delete {
+  color: #cc3333;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #cc3333;
+  border-radius: 2rem;
+  padding: 0.1rem;
+  text-align: center;
+  width: 1.4rem;
+  font-size: 0.3rem;
+  font-weight: bold;
+  transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
+  margin: 0 0.2rem 0.2rem 0.2rem;
+}
+
+.button-delete:hover {
+  color: #cc3333;
+  border: 1px solid #cc3333;
+  filter: drop-shadow(0 0 1px #cc3333);
 }
 
 .button-set:hover {
   color: rgb(241, 165, 94);
-  border: 1.5px solid rgb(241, 165, 94);
+  border: 1px solid rgb(241, 165, 94);
   filter: drop-shadow(0 0 1px rgb(160, 113, 70));
 }
 

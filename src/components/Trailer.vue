@@ -20,6 +20,7 @@
           (draggedPallet, palletToReplace) =>
             replacePallets(draggedPallet, palletToReplace)
         "
+        @delete-pallet="(number) => deletePallet(number)"
       ></pallet>
     </TransitionGroup>
     <Transition name="fade"
@@ -101,6 +102,14 @@ export default {
 
       this.pallets.splice(draggedPalletIndex, 1);
       this.pallets.splice(palletToReplaceIndex, 0, draggedPalletTemp);
+    },
+    deletePallet(number) {
+      const palletToDelete = this.pallets
+        .map((el) => el.number)
+        .indexOf(Number(number));
+      setTimeout(() => {
+        this.pallets.splice(palletToDelete, 1);
+      }, 200);
     },
   },
   watch: {

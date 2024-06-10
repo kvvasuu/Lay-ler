@@ -18,7 +18,7 @@
       <div class="pallet-input-group">
         <input
           v-model="palletLength"
-          name="palletLength"
+          id="palletLength"
           ref="palletLength"
           type="number"
           step="0.1"
@@ -47,7 +47,7 @@
       <div class="pallet-input-group">
         <input
           v-model="palletWidth"
-          name="palletWidth"
+          id="palletWidth"
           ref="palletWidth"
           type="number"
           step="0.1"
@@ -76,7 +76,7 @@
       <div class="pallet-input-group">
         <input
           v-model="numberOfPallets"
-          name="numberOfPallets"
+          id="numberOfPallets"
           ref="numberOfPallets"
           type="number"
           step="1"
@@ -132,6 +132,7 @@
     <input
       class="trailer-length trailer-size"
       v-model="trailerLength"
+      id="trailerLength"
       type="number"
       min="1"
       max="20"
@@ -140,6 +141,7 @@
     <input
       class="trailer-width trailer-size"
       v-model="trailerWidth"
+      id="trailerWidth"
       type="number"
       min="1"
       max="4"
@@ -241,14 +243,14 @@ export default {
     },
     increaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
-      this[ref.name] = Math.round(Number(this[ref.name] + step) * 100) / 100;
+      if (ref.id == "numberOfPallets") step = 1;
+      this[ref.id] = Math.round(Number(this[ref.id] + step) * 100) / 100;
     },
     decreaseInput(ref) {
       let step = 0.1;
-      if (ref.name == "numberOfPallets") step = 1;
-      if (this[ref.name] > 0)
-        this[ref.name] = Math.round(Number(this[ref.name] - step) * 100) / 100;
+      if (ref.id == "numberOfPallets") step = 1;
+      if (this[ref.id] > 0)
+        this[ref.id] = Math.round(Number(this[ref.id] - step) * 100) / 100;
     },
     async mouseDown(ref, type) {
       this.isMouseDown = true;
@@ -380,38 +382,42 @@ export default {
       }
     },
     checkPalletLength() {
-      if (this.palletLength > this.trailerLength) {
-        this.palletLength = this.trailerLength;
-      }
-      if (this.palletLength < 0.4) {
-        this.palletLength = 0.4;
-      }
-      if (
-        this.pallets.every(
-          (el) =>
-            el.length === this.pallets[0].length &&
-            this.pallets[0].length !== this.palletLength
-        )
-      ) {
-        this.pallets.map((el) => {
-          el.length = this.palletLength;
-        });
+      if (this.pallets.length > 0) {
+        if (this.palletLength > this.trailerLength) {
+          this.palletLength = this.trailerLength;
+        }
+        if (this.palletLength < 0.4) {
+          this.palletLength = 0.4;
+        }
+        if (
+          this.pallets.every(
+            (el) =>
+              el.length === this.pallets[0].length &&
+              this.pallets[0].length !== this.palletLength
+          )
+        ) {
+          this.pallets.map((el) => {
+            el.length = this.palletLength;
+          });
+        }
       }
     },
     checkPalletWidth() {
-      if (this.palletWidth > this.trailerWidth) {
-        this.palletWidth = this.trailerWidth;
-      }
-      if (this.palletWidth < 0.4) {
-        this.palletWidth = 0.4;
-      }
-      if (
-        this.pallets.every((el) => el.width === this.pallets[0].width) &&
-        this.pallets[0].width !== this.palletWidth
-      ) {
-        this.pallets.map((el) => {
-          el.width = this.palletWidth;
-        });
+      if (this.pallets.length > 0) {
+        if (this.palletWidth > this.trailerWidth) {
+          this.palletWidth = this.trailerWidth;
+        }
+        if (this.palletWidth < 0.4) {
+          this.palletWidth = 0.4;
+        }
+        if (
+          this.pallets.every((el) => el.width === this.pallets[0].width) &&
+          this.pallets[0].width !== this.palletWidth
+        ) {
+          this.pallets.map((el) => {
+            el.width = this.palletWidth;
+          });
+        }
       }
     },
     updateInputs(pallet) {
