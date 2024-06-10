@@ -14,6 +14,7 @@ The application has been deployed on Netlify - [https://layler.netlify.app/](htt
 - Real-Time Visualization: The application visualizes the pallet layout in real time.
 - Pallet Sorting: Option to automatically sort pallets from largest to smallest for optimal space utilization.
 - Pallet Modification: Each pallet can be individually edited to change its size, name, or color.
+- Drag & Drop: Pallets can be arranged as you like via drag and drop system.
 
 ## Technologies:
 
