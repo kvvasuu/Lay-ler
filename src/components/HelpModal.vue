@@ -3,7 +3,55 @@
     <div class="help-modal-content" @click.stop="">
       <div class="close" @click="() => this.$emit('toggle-modal')"></div>
       <div class="title">How to use?</div>
-      <div class="content"></div>
+      <div class="content">
+        <ol class="list">
+          <li class="section">
+            Setting Initial Parameters
+            <ul>
+              <li>Choose the trailer dimensions</li>
+              <li>Set the number of pallets and their sizes</li>
+            </ul>
+          </li>
+          <li class="section">
+            Modifying individual pallets
+            <ul>
+              <li>Changing pallet color, name, and dimensions</li>
+            </ul>
+          </li>
+          <li class="section">
+            Sorting pallets
+            <ul>
+              <li>Sorting pallets from largest to smallest</li>
+            </ul>
+          </li>
+          <li class="section">
+            Arranging pallets using drag and drop
+            <ul>
+              <li>Moving pallets</li>
+            </ul>
+          </li>
+          <li class="section">
+            Saving and loading pallet layouts
+            <ul>
+              <li>Saving the pallet layout</li>
+              <li>Loading the pallet layout</li>
+            </ul>
+          </li>
+          <li class="section">
+            Real-Time visualization
+            <ul>
+              <li>
+                All changes made in the application are immediately visible on
+                the trailer visualization.
+              </li>
+              <li>
+                You can observe how each modification affects the placement of
+                the pallets.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +87,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: 10rem;
+  height: auto;
   width: 10rem;
   margin: 0.2rem;
   border-radius: 0.6rem;
@@ -52,6 +100,25 @@ export default {
   margin: 1.3rem 0.6rem 0rem 0.6rem;
   width: 5rem;
   text-align: center;
+}
+
+.content {
+  margin: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.section {
+  font-size: 0.32rem;
+  margin-bottom: 0.2rem;
+}
+
+li {
+  font-size: 0.24rem;
+}
+
+ul {
+  padding-left: 0.24rem;
+  list-style-type: disc;
+  margin-top: 0.04rem;
 }
 
 .close {
