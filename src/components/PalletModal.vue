@@ -220,7 +220,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 10rem;
+  height: auto;
   width: 10rem;
   margin: 0.2rem;
   border-radius: 0.6rem;
@@ -248,6 +248,7 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   text-transform: uppercase;
+  margin: 0.8rem 0 0 0;
 }
 
 .name-input {
@@ -276,6 +277,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 0.6rem 0;
 }
 
 .pallet-input-group {
@@ -340,7 +343,7 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
-  margin: 0 0.2rem 0 0.2rem;
+  margin: 0 0.2rem 0.2rem 0.2rem;
 }
 
 .button-delete {
@@ -355,7 +358,7 @@ export default {
   font-size: 0.3rem;
   font-weight: bold;
   transition: color 0.3s ease, border 0.3s ease, filter 0.3s ease;
-  margin: 0 0.2rem 0 0.2rem;
+  margin: 0 0.2rem 0.2rem 0.2rem;
 }
 
 .button-delete:hover {
