@@ -155,7 +155,7 @@ export default {
   border-radius: 0.08rem;
   padding: 1px;
   overflow: hidden;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
 }
 
 .unloading {
