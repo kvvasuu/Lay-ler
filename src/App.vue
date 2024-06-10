@@ -6,7 +6,12 @@
     most efficient layout, saving you time and space.<br />
     The perfect solution for logistics and transportation!
   </div>
-  <img class="help-button" src="./assets/circle-info-solid.svg" alt="help" />
+  <img
+    class="help-button"
+    src="./assets/circle-info-solid.svg"
+    alt="help"
+    @click="toggleHelpModal"
+  />
 
   <div class="form-container">
     <div class="form-inputs">
@@ -175,14 +180,17 @@
       Layout loaded!
     </div></Transition
   >
+  <HelpModal v-if="helpModal" @toggle-modal="toggleHelpModal"></HelpModal>
 </template>
 
 <script>
+import HelpModal from "./components/HelpModal.vue";
 import Trailer from "./components/Trailer.vue";
 
 export default {
   components: {
     Trailer,
+    HelpModal,
   },
   data() {
     return {
@@ -201,6 +209,7 @@ export default {
       unloading: false,
       saveStateModal: false,
       loadStateModal: false,
+      helpModal: false,
     };
   },
   methods: {
@@ -409,6 +418,9 @@ export default {
       console.log(pallet);
       this.palletLength = pallet.length;
       this.palletWidth = pallet.width;
+    },
+    toggleHelpModal() {
+      this.helpModal = !this.helpModal;
     },
   },
   watch: {
