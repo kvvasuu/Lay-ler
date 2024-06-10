@@ -765,6 +765,7 @@ export default {
   border: 1px solid #929292;
   border-radius: 2rem;
   top: 1rem;
+  z-index: 12;
 }
 
 @media screen and (max-width: 1000px) {
