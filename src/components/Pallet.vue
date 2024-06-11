@@ -26,7 +26,7 @@
       @click="togglePalletSizeModal"
       :id="pallet.number + 'a'"
     >
-      <div class="number">
+      <div class="number" :class="{ 'number-small': showNumberSize }">
         {{ pallet.number + 1 }}
       </div>
       <div class="name">
@@ -144,6 +144,16 @@ export default {
     colorCompute() {
       return this.pallet.color;
     },
+    showNumberSize() {
+      if (
+        this.pallet.length <= 0.8 &&
+        this.pallet.width <= 0.8 &&
+        this.pallet.number > 99
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>
@@ -173,6 +183,10 @@ export default {
 .number {
   padding: 4px;
   transition: opacity 0.3s ease;
+}
+
+.number-small {
+  font-size: 0.2rem;
 }
 
 .dimensions {
