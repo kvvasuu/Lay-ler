@@ -137,6 +137,11 @@ export default {
       return !this.rotate ? this.trailerLength : this.trailerWidth;
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.trailer.classList.add("trailer-transition");
+    }, 500);
+  },
 };
 </script>
 
@@ -155,7 +160,10 @@ export default {
   border-radius: 0.08rem;
   padding: 1px;
   overflow: hidden;
-  /* transition: all 0.5s ease; */
+}
+
+.trailer-transition {
+  transition: all 0.5s ease;
 }
 
 .unloading {
