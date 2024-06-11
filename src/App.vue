@@ -29,7 +29,7 @@
         /><label class="pallet-input-label" for="palletLength">Length:</label>
         <div
           class="pallet-input-arrow-up"
-          @mousedown="mouseDown(this.$refs.palletLength, 'increase')"
+          @mousedown="mouseDown($refs.palletLength, 'increase')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >
@@ -37,7 +37,7 @@
         </div>
         <div
           class="pallet-input-arrow-down"
-          @mousedown="mouseDown(this.$refs.palletLength, 'decrease')"
+          @mousedown="mouseDown($refs.palletLength, 'decrease')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >
@@ -58,7 +58,7 @@
         /><label class="pallet-input-label" for="palletWidth">Width:</label>
         <div
           class="pallet-input-arrow-up"
-          @mousedown="mouseDown(this.$refs.palletWidth, 'increase')"
+          @mousedown="mouseDown($refs.palletWidth, 'increase')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >
@@ -66,7 +66,7 @@
         </div>
         <div
           class="pallet-input-arrow-down"
-          @mousedown="mouseDown(this.$refs.palletWidth, 'decrease')"
+          @mousedown="mouseDown($refs.palletWidth, 'decrease')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >
@@ -88,7 +88,7 @@
         >
         <div
           class="pallet-input-arrow-up"
-          @mousedown="mouseDown(this.$refs.numberOfPallets, 'increase')"
+          @mousedown="mouseDown($refs.numberOfPallets, 'increase')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >
@@ -96,7 +96,7 @@
         </div>
         <div
           class="pallet-input-arrow-down"
-          @mousedown="mouseDown(this.$refs.numberOfPallets, 'decrease')"
+          @mousedown="mouseDown($refs.numberOfPallets, 'decrease')"
           @mouseout="mouseUp"
           @mouseup="mouseUp"
         >

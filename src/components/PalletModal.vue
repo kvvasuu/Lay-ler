@@ -1,11 +1,11 @@
 <template>
   <div
-    @click="() => this.$emit('toggle-modal')"
+    @click="() => $emit('toggle-modal')"
     class="pallet-modal"
     @keydown.enter="updatePallet"
   >
     <div class="pallet-modal-content" @click.stop="">
-      <div class="close" @click="() => this.$emit('toggle-modal')"></div>
+      <div class="close" @click="() => $emit('toggle-modal')"></div>
       <div class="pallet-number">{{ pallet.number + 1 }}</div>
       <div class="pallet-name">
         <input
@@ -26,10 +26,11 @@
             min="0.4"
             max="13.6"
             class="pallet-input"
+            @blur="checkPalletLength"
           /><label class="pallet-input-label" for="length">Length:</label>
           <div
             class="pallet-input-arrow-up"
-            @mousedown="mouseDown(this.$refs.palletLength, 'increase')"
+            @mousedown="mouseDown($refs.palletLength, 'increase')"
             @mouseout="mouseUp"
             @mouseup="mouseUp"
           >
@@ -55,10 +56,11 @@
             min="0.4"
             max="2.4"
             class="pallet-input"
+            @blur="checkPalletWidth"
           /><label class="pallet-input-label" for="width">Width:</label>
           <div
             class="pallet-input-arrow-up"
-            @mousedown="mouseDown(this.$refs.palletWidth, 'increase')"
+            @mousedown="mouseDown($refs.palletWidth, 'increase')"
             @mouseout="mouseUp"
             @mouseup="mouseUp"
           >
@@ -66,7 +68,7 @@
           </div>
           <div
             class="pallet-input-arrow-down"
-            @mousedown="mouseDown(this.$refs.palletWidth, 'decrease')"
+            @mousedown="mouseDown($refs.palletWidth, 'decrease')"
             @mouseout="mouseUp"
             @mouseup="mouseUp"
           >
@@ -188,9 +190,7 @@ export default {
     deletePallet() {
       this.$emit("delete-pallet", this.pallet.number);
     },
-  },
-  watch: {
-    palletLength() {
+    checkPalletLength() {
       if (this.palletLength > 13.6) {
         this.palletLength = 13.6;
       }
@@ -198,7 +198,7 @@ export default {
         this.palletLength = 0.4;
       }
     },
-    palletWidth() {
+    checkPalletWidth() {
       if (this.palletWidth > 2.4) {
         this.palletWidth = 2.4;
       }

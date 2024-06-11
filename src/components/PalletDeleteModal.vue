@@ -1,6 +1,10 @@
 <template>
-  <div @click="() => this.$emit('toggle-modal')" class="help-modal">
-    <div class="help-modal-content" @click.stop="">
+  <div
+    @click="() => $emit('toggle-modal')"
+    class="pallet-delete-modal"
+    @click.stop=""
+  >
+    <div class="pallet-delete-modal-content" @click.stop="">
       <div class="title">Are you sure?</div>
       <div class="buttons">
         <button class="button-set" @click="$emit('toggle-modal')">
@@ -25,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.help-modal {
+.pallet-delete-modal {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -40,7 +44,7 @@ export default {
   cursor: default;
 }
 
-.help-modal-content {
+.pallet-delete-modal-content {
   position: inherit;
   box-sizing: border-box;
   display: flex;
