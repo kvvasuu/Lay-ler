@@ -171,7 +171,7 @@ export default {
 }
 
 .number {
-  padding: 2px;
+  padding: 4px;
   transition: opacity 0.3s ease;
 }
 

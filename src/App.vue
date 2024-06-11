@@ -719,7 +719,7 @@ export default {
 .trailer-width {
   position: absolute;
   top: 50%;
-  right: -50px;
+  right: -60px;
   transform: translate(0, -50%);
   width: 40px;
   border: none;
