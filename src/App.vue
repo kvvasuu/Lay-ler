@@ -504,6 +504,7 @@ export default {
   cursor: pointer;
   border-radius: 1rem;
   margin: 0.1rem;
+  transition: all 0.3s ease;
 }
 
 .help-button:active {
@@ -610,6 +611,7 @@ export default {
   border-top: 0.06rem solid #bdbdbd;
   border-left: 0.06rem solid #bdbdbd;
   rotate: 45deg;
+  transition: all 0.3s ease;
 }
 
 .arrow-down {
@@ -621,6 +623,7 @@ export default {
   border-top: 0.06rem solid #bdbdbd;
   border-left: 0.06rem solid #bdbdbd;
   rotate: -135deg;
+  transition: all 0.3s ease;
 }
 
 .arrow:hover {
