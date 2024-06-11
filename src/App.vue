@@ -6,13 +6,17 @@
     most efficient layout, saving you time and space.<br />
     The perfect solution for logistics and transportation!
   </div>
-  <img
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    fill="currentColor"
     class="help-button"
-    src="./assets/circle-info-solid.svg"
-    alt="help"
     @click="toggleHelpModal"
-  />
-
+  >
+    <path
+      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+    />
+  </svg>
   <div class="form-container">
     <div class="form-inputs">
       <div class="pallet-input-group">
@@ -508,8 +512,7 @@ export default {
 }
 
 .help-button:active {
-  filter: brightness(0) saturate(100%) invert(78%) sepia(88%) saturate(1033%)
-    hue-rotate(314deg) brightness(97%) contrast(94%);
+  color: rgb(223, 163, 108);
   box-shadow: 0 0 4px rgb(160, 113, 70);
 }
 
@@ -733,16 +736,13 @@ export default {
   text-align: center;
   font-size: 20px;
   color: #bdbdbd;
+  transition: color 0.3s ease;
 }
 
 .trailer-size:focus {
   color: rgb(241, 165, 94);
   filter: drop-shadow(0 0 1px rgb(160, 113, 70));
-}
-
-.trailer-size:focus {
   outline: none !important;
-  border-bottom: 1px solid transparent;
 }
 
 .trailer-size::-webkit-outer-spin-button,
@@ -817,8 +817,7 @@ export default {
     filter: drop-shadow(0 0 1px rgb(160, 113, 70));
   }
   .help-button:hover {
-    filter: brightness(0) saturate(100%) invert(78%) sepia(88%) saturate(1033%)
-      hue-rotate(314deg) brightness(97%) contrast(94%);
+    color: rgb(223, 163, 108);
     box-shadow: 0 0 4px rgb(160, 113, 70);
   }
 }
