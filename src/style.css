@@ -26,6 +26,19 @@ body {
   overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #232e33;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 3px;
+}
+
 #app {
   position: relative;
   display: flex;
@@ -73,5 +86,11 @@ input[type="number"]::-webkit-inner-spin-button {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: #5c5c5c #232e33;
   }
 }
